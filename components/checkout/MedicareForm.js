@@ -77,31 +77,6 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
     if (!values.memberYear) {
       errors.memberYear = 'Required';
     }
-    
-    // if (!values.state) {
-    //     errors.state = 'Required';
-    // } else if (values.state.length > 20) {
-    //     errors.state = 'Must be 20 characters or less';
-    // }
-
-    // if (!values.zip) {
-    //     errors.zip = 'Required';
-    //   } else if (values.zip.length > 10) {
-    //     errors.zip = 'Must be 10 characters or less';
-    //   }
-
-    // console.log(errors)
-    // if (Object.keys(errors).length > 0) {
-    //     setAddressErrors(errors)
-    //     console.log('addressErrors sad: ', addressErrors)
-    // } else {
-    //     setAddressErrors(errors)
-    //     setAddressAttributes(values)
-    //     console.log('addressErrors happy: ', errors)
-    // }
-    // setAddressErrors(errors)
-    // console.log(errors)
-    // console.log("Values: ", values)
     setMedicareAttributes(values)
     console.log(medicareAttributes)
     return errors;
@@ -121,18 +96,18 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
     })
   
   let months = [
-    <option value={1}>January</option>,
-    <option value={2}>February</option>,
-    <option value={3}>March</option>,
-    <option value={4}>April</option>,
-    <option value={5}>May</option>,
-    <option value={6}>June</option>,
-    <option value={7}>July</option>,
-    <option value={8}>August</option>,
-    <option value={9}>September</option>,
-    <option value={10}>October</option>,
-    <option value={11}>November</option>,
-    <option value={12}>December</option>,
+    <option key={1}  value={1}>January</option>,
+    <option key={2} value={2}>February</option>,
+    <option key={3} value={3}>March</option>,
+    <option key={4} value={4}>April</option>,
+    <option key={5} value={5}>May</option>,
+    <option key={6} value={6}>June</option>,
+    <option key={7} value={7}>July</option>,
+    <option  key={8}value={8}>August</option>,
+    <option key={9} value={9}>September</option>,
+    <option key={10} value={10}>October</option>,
+    <option key={11} value={11}>November</option>,
+    <option key={12} value={12}>December</option>,
   ]
   
   let days = []
@@ -205,7 +180,7 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
         </Grid>
         <Grid item xs={12} sm={12}>
           <Typography variant="h6" gutterBottom>
-                  Medicare Member's Date of Birth
+                  Medicare Member&apos;s Date of Birth
             </Typography>
         </Grid>
         
@@ -353,7 +328,7 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
           >
             <FormLabel id="demo-controlled-radio-buttons-group" sx={{
         color: 'black'
-      }}>Is the Medicare Member's address different from the shipping address?</FormLabel>
+      }}>Is the Medicare Member&apos;s address different from the shipping address?</FormLabel>
       <RadioGroup
         aria-labelledby="demo-controlled-radio-buttons-group"
               name="memberShippingAddress"
