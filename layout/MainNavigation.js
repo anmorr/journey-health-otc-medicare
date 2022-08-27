@@ -15,7 +15,7 @@ const MainNavigation = () => {
     <header className={classes.header}>
       <Link href='/'>
         <div className={classes.logo}>
-          <Image src="/../public/journey_health_image.webp" alt="me" width="150" height="50" />
+          <Image src="https://journey-health-images.s3.us-west-1.amazonaws.com/journey_health_image.webp" alt="me" width="150" height="50" />
         </div>
       </Link>
       <nav>
