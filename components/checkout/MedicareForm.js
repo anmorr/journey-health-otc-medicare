@@ -91,7 +91,7 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
       validate,
       onSubmit: values => {
           handleNext()
-          alert(JSON.stringify(values, null, 2))
+          // alert(JSON.stringify(values, null, 2))
       }
     })
   
@@ -273,7 +273,7 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
           paddingTop: 8
         }}>
             <Box>
-              <Image src='/../public/medicare-card-new-marked-black.png' alt="me" width="375" height="225" />
+              <Image src='https://journey-health-images.s3.us-west-1.amazonaws.com/medicare-card-new-marked-black.png' alt="me" width="375" height="225" />
             </Box>
           </Grid>
         <Grid item xs={12} md={12}>
