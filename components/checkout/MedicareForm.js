@@ -212,8 +212,8 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
                     ""
             }</FormHelperText> */}
       </FormControl>
-        </Grid>
-        <Grid item xs={12} md={4}>
+        {/* </Grid>
+        <Grid item xs={12} md={4}> */}
         <FormControl
             sx={{ minWidth: 100 }}
                           disabled={false}
@@ -241,8 +241,8 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
                     ""
             }</FormHelperText> */}
       </FormControl>
-        </Grid>
-        <Grid item xs={12} md={4}>
+        {/* </Grid>
+        <Grid item xs={12} md={4}> */}
         <FormControl
             sx={{ minWidth: 100 }}
             disabled={false}
