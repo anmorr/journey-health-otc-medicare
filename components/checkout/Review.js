@@ -28,7 +28,7 @@ export default function Review({ addressAttributes, medicareAttributes, handleBa
   
   const formAttributes = { ...addressAttributes, ...medicareAttributes }
   
-  console.log("formAttributes: ", formAttributes)
+  // console.log("formAttributes: ", formAttributes)
 
   return (
     <React.Fragment>
@@ -60,7 +60,7 @@ export default function Review({ addressAttributes, medicareAttributes, handleBa
             {medicareAttributes.memberAddress1 ? medicareAttributes.memberAddress1 : addressAttributes.address1}</Typography>
           {(medicareAttributes.memberAddress2 || addressAttributes.address2) && <Typography gutterBottom>{medicareAttributes.memberAddress2 ? medicareAttributes.memberAddress2 : addressAttributes.address2}</Typography>}
           <Typography gutterBottom>
-            {medicareAttributes.memberCity ? medicareAttributes.memberCity : addressAttributes.city}
+            {medicareAttributes.memberCity ? medicareAttributes.memberCity : addressAttributes.city + ", "}
             {medicareAttributes.memberState ? medicareAttributes.memberState : addressAttributes.state + " "}
             {medicareAttributes.memberZip ? medicareAttributes.memberZip : addressAttributes.zip}
           </Typography>

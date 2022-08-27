@@ -78,7 +78,7 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
       errors.memberYear = 'Required';
     }
     setMedicareAttributes(values)
-    console.log(medicareAttributes)
+    // console.log(medicareAttributes)
     return errors;
 }
 

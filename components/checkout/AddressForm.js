@@ -154,18 +154,18 @@ export default function AddressForm({
                 errors.zip = 'Must be 10 characters or less';
               }
         
-            console.log(errors)
+            // console.log(errors)
             if (Object.keys(errors).length > 0) {
                 setAddressErrors(errors)
-                console.log('addressErrors sad: ', addressErrors)
+                // console.log('addressErrors sad: ', addressErrors)
             } else {
                 setAddressErrors(errors)
                 setAddressAttributes(values)
-                console.log('addressErrors happy: ', errors)
+                // console.log('addressErrors happy: ', errors)
             }
             setAddressErrors(errors)
-            console.log(errors)
-            console.log("Values: ", values)
+            // console.log(errors)
+            // console.log("Values: ", values)
             return errors;
         }
 

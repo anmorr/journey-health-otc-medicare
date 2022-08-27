@@ -140,8 +140,8 @@ export default function Checkout() {
     }
   }
 
-  console.log('Address Attributes: ', addressAttributes)
-  console.log('Medicare Attributes: ', medicareAttributes)
+  // console.log('Address Attributes: ', addressAttributes)
+  // console.log('Medicare Attributes: ', medicareAttributes)
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
