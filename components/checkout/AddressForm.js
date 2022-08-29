@@ -15,6 +15,7 @@ import * as Yup from 'yup';
 import { states } from '../../shared/data/states.js'
 import { Box } from '@mui/material';
 import { Button } from '@mui/material';
+import MuiPhoneNumber from 'material-ui-phone-number';
 
 // const validate = values => {
 
@@ -125,6 +126,10 @@ export default function AddressForm({
             }
         
             //=========
+          
+            if (!values.phoneNumber) {
+              errors.phoneNumber = 'Required';
+            } 
         
             if (!values.address1) {
                 errors.address1 = 'Required';
@@ -279,6 +284,26 @@ export default function AddressForm({
                           error={formik.touched.emailConfirmation && formik.errors.emailConfirmation ? true : false}
             helperText={formik.touched.emailConfirmation && formik.errors.emailConfirmation ?
                     formik.errors.emailConfirmation :
+                    ""
+            }
+          />
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <TextField
+            country="US"
+            required
+            id="phoneNumber"
+            name="phoneNumber"
+            label="Phone Number"
+            fullWidth
+            autoComplete="phone"
+                      variant="standard"
+                      onChange={formik.handleChange}
+                      value={formik.values.phoneNumber}
+                          onBlur={formik.handleBlur}
+                          error={formik.touched.phoneNumber && formik.errors.phoneNumber ? true : false}
+            helperText={formik.touched.phoneNumber && formik.errors.phoneNumber ?
+                    formik.errors.phoneNumber :
                     ""
             }
           />

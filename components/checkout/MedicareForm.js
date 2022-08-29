@@ -38,10 +38,10 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
         errors.memberLastName = 'Must be 20 characters or less';
     }
     
-    if (!values.medicareNumber) {
-        errors.medicareNumber = 'Required';
-    } else if (values.medicareNumber.length < 11) {
-        errors.medicareNumber = 'Invalid Medicare Number. Missing digits';
+    if (!values.memberId) {
+        errors.memberId = 'Required';
+    } else if (values.memberId.length < 11) {
+        errors.memberId = 'Invalid Medicare Number. Missing digits';
     }
     
     // if (!values.emailConfirmation) {
@@ -278,22 +278,22 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
           </Grid>
         <Grid item xs={12} md={12}>
           <TextField
-            error={formik.touched.medicareNumber && formik.errors.medicareNumber ? true : false}
+            error={formik.touched.memberId && formik.errors.memberId ? true : false}
             helperText={
-                formik.touched.medicareNumber && formik.errors.medicareNumber ?
-                    formik.errors.medicareNumber :
+                formik.touched.memberId && formik.errors.memberId ?
+                    formik.errors.memberId :
                     ""
             }
 
-            name='medicareNumber'
+            name='memberId'
             required
-            id="medicareNumber"
+            id="memberId"
             label="Medicare Number"
             fullWidth
             // autoComplete="cc-exp"
             variant="standard"
             onChange={formik.handleChange}
-                      value={formik.values.medicareNumber}
+                      value={formik.values.memberId}
                       onBlur={formik.handleBlur}
           />
         </Grid>

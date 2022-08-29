@@ -2,6 +2,7 @@ import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
 import Paper from '@mui/material/Paper';
@@ -61,7 +62,8 @@ export default function Checkout() {
     address2: '',
     city: '',
     state: '',
-    zip: ''
+    zip: '',
+    phoneNumber: ''
   }
 
   let initialMedicareValues = {
@@ -71,7 +73,7 @@ export default function Checkout() {
     memberMonth: '',
     memberDay: '',
     memberYear: '',
-    medicareNumber: '',
+    memberId: '',
     memberRelation: null,
     memberShippingAddress: '',
     memberAddress1: '',
@@ -86,14 +88,15 @@ export default function Checkout() {
     const [addressErrors, setAddressErrors] = useState({});
     const [medicareAttributes, setMedicareAttributes] = useState(initialMedicareValues);
     const [medicareErrors, setMedicareErrors] = useState({});
-    const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState(0);
+  const [orderNumber, setOrderNumber] = useState()
+  const [isLoading, setIsLoading] = useState(false)
 
     const addressFormSubmitHandler = (values) => {
       setAddressAttributes(values)
 
     }
     const handleNext = () => {
-      
     setActiveStep(activeStep + 1);
   };
 
@@ -134,6 +137,9 @@ export default function Checkout() {
           activeStep={activeStep}
           setActiveStep={setActiveStep}
           handleBack={handleBack}
+          setOrderNumber={setOrderNumber}
+          setIsLoading={setIsLoading}
+          isLoading={isLoading}
         />;
       default:
         throw new Error('Unknown step');
@@ -174,16 +180,16 @@ export default function Checkout() {
           </Stepper>
           <React.Fragment>
             {activeStep === steps.length ? (
-              <React.Fragment>
-                <Typography variant="h5" gutterBottom>
-                  Thank you for your order.
-                </Typography>
-                <Typography variant="subtitle1">
-                  Your order number is #2001539. We have emailed your order
-                  confirmation, and will send you an update when your order has
-                  shipped.
-                </Typography>
-              </React.Fragment>
+                <React.Fragment>
+                  <Typography variant="h5" gutterBottom>
+                    Thank you for your order.
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Your order id is # <strong>{orderNumber}</strong>. We have emailed your order
+                    confirmation, and will send you an update when your order has
+                    shipped.
+                  </Typography>
+                </React.Fragment>
             ) : (
               <React.Fragment>
                 {getStepContent(activeStep)}
