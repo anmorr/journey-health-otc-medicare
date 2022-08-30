@@ -100,20 +100,21 @@ const Hero = () => {
         <Container>
           <Box maxWidth={{ md: 1, sm: '50%' }}>
             <Typography
-              variant="h2"
+              variant="h3"
               color="#1D4E78"
               gutterBottom
               sx={{
                 fontWeight: 700,
               }}
             >
-              Receive Eight Free Rapid COVID Tests covered by Medicare
+              Receive 8 Free Rapid COVID Tests Monthly.
               <br />
               {' '}
               <Typography
                 color={'#EC7E32'}
                 component={'span'}
-                variant={'inherit'}
+                variant={'h3'}
+                
                 sx={{
                   background: `linear-gradient(180deg, transparent 82%, ${alpha(
                     "#EC7E32",
@@ -121,11 +122,12 @@ const Hero = () => {
                   )} 0%)`,
                 }}
               >
-                <Typed
+                {/* <Typed
                   strings={['$0 OUT OF POCKET ', '100% Covered by Medicare ']}
                   typeSpeed={90}
                   loop={true}
-                />
+                /> */}
+                $0 OUT OF POCKET.<br/> 100% Covered by Medicare.
               </Typography>
             </Typography>
             <Typography
