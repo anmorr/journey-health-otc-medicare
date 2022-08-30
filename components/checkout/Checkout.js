@@ -189,7 +189,7 @@ export default function Checkout() {
             
           }}>
             {steps.map((label) => (
-              <Step 
+              <Step key={label}
               >
                 <StepLabel>
                 {label}
