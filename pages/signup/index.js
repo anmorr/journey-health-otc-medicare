@@ -1,15 +1,18 @@
 import Checkout from "../../components/checkout/Checkout";
 import Script from "next/script";
+import Head from "next/head";
 
 const OrderPage = () => {
 
 
     return (
         <>
-            <title>COVID Test Signup</title>
-            <meta name='free-covid-tests'
-          content='Receive Free COVID tests! $0 out of pocket.' />
-        
+            <Head>
+               <title>COVID Test Signup</title>
+                <meta name='free-covid-tests'
+                content='Receive Free COVID tests! $0 out of pocket.' /> 
+            </Head>
+            
         <Script
         src="https://www.googletagmanager.com/gtag/js?id=UA-239505202-1"
         strategy="afterInteractive"

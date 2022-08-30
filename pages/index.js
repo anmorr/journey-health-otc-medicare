@@ -15,7 +15,10 @@ const HomePage = () => {
             <meta name='free-covid-tests'
           content='Receive Free COVID tests! $0 out of pocket.' />
         
-        <Script
+        
+        
+      </Head>
+      <Script
         src="https://www.googletagmanager.com/gtag/js?id=UA-239505202-1"
         strategy="afterInteractive"
         />
@@ -30,8 +33,6 @@ const HomePage = () => {
           
           `}
         </Script>
-        
-        </Head>
         <IndexView />
     </Fragment>
             

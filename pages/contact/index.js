@@ -3,17 +3,19 @@ import Contact from "../../components/ContactPageCover/components/Form/Form";
 import ContactPageCover from '../../components/ContactPageCover'
 import ContactPageSideBarMap from '../../components/ContactPageSidebarMap'
 import Script from "next/script";
+import Head from "next/head";
 
 const ContactPage = () => {
 
 
     return (
         <>
-            
-            <title>COVID Test Signup - Contact</title>
+            <Head>
+                <title>COVID Test Signup - Contact</title>
             <meta name='free-covid-tests'
           content='Receive Free COVID tests! $0 out of pocket.' />
-        
+            </Head>
+            
         <Script
         src="https://www.googletagmanager.com/gtag/js?id=UA-239505202-1"
         strategy="afterInteractive"
@@ -26,7 +28,8 @@ const ContactPage = () => {
 
           gtag('config', 'UA-239505202-1');
           `}
-        </Script>
+            </Script>
+            
              <ContactPageSideBarMap />
         </>
            
