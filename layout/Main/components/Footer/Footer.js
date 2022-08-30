@@ -52,7 +52,7 @@ const Footer = () => {
                 Home
               </Link>
             </Box>
-            {pathname !== "/contact" && <Box marginTop={1}>
+            {/* {pathname !== "/contact" && <Box marginTop={1}>
               <Button
                 onClick={() => {router.push("/signup")}}
                 variant='contained'
@@ -68,7 +68,7 @@ const Footer = () => {
               >
                 Sign Up Now
               </Button>
-            </Box>}
+            </Box>} */}
           </Box>
         </Box>
       </Grid>

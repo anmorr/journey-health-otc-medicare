@@ -65,7 +65,7 @@ const mock = [
   {
     title: 'We will send the tests to your home.',
     subtitle:
-      'To ensure you are able to remain safe. We will send 8 tests each month for the duration of the Public Health Emergency.',
+      'To ensure you are able to remain safe, we will send 8 tests each month for the duration of the Public Health Emergency.',
     icon: (
       <Looks3Icon sx={{
         color: "#EC7E32",

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { useTheme } from '@mui/material/styles';
+import { useRouter } from 'next/router';
 
 import NavItem from './components/NavItem';
 
@@ -18,6 +19,8 @@ const SidebarNav = ({ pages }) => {
     portfolio: portfolioPages,
     blog: blogPages,
   } = pages;
+
+  const router = useRouter();
 
   return (
     <Box>
@@ -74,7 +77,7 @@ const SidebarNav = ({ pages }) => {
             fullWidth
             component="a"
             target="blank"
-            href="/signup"
+            onClick={() => {router.push("/signup")}}
             sx={{
               background: "#EC7E32",
               "&:hover": {
@@ -87,6 +90,29 @@ const SidebarNav = ({ pages }) => {
           >
             Sign Up Now
           </Button>
+          
+        </Box>
+        <Box marginTop={1}>
+          <Button
+            size={'large'}
+            variant="contained"
+            fullWidth
+            component="a"
+            target="blank"
+            onClick={() => {router.push("/contact")}}
+            sx={{
+              background: "#EC7E32",
+              "&:hover": {
+                //you want this to be the same as the backgroundColor above
+                background: "#1D4E78",
+                color: "#EC7E32"
+            }
+            }}
+          
+          >
+            Contact Us
+          </Button>
+          
         </Box>
       </Box>
     </Box>

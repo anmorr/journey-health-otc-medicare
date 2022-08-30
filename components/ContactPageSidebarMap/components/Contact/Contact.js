@@ -11,7 +11,7 @@ import Avatar from '@mui/material/Avatar';
 const mock = [
   {
     label: 'Phone',
-    value: '510-555-1928',
+    value: '(415) 848-9111',
     icon: (
       <svg
         width={20}
@@ -26,7 +26,7 @@ const mock = [
   },
   {
     label: 'Email',
-    value: 'covid-tests-support@journeyhealth.io',
+    value: 'test-info@journeyhealth.io',
     icon: (
       <svg
         width={20}
