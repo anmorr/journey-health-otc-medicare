@@ -18,6 +18,7 @@ import MedicareForm from './MedicareForm';
 import Review from './Review';
 import { useState } from 'react';
 import Main from '../../layout/Main/Main';
+import { makeStyles } from '@mui/styles';
 
 function Copyright() {
   return (
@@ -146,6 +147,15 @@ export default function Checkout() {
         throw new Error('Unknown step');
     }
   }
+  // const useStyles = makeStyles(() => ({
+  //   root: {
+  //     "& .MuiStepIcon-active": { color: "#1D4E78" },
+  //     "& .MuiStepIcon-completed": { color: "#1D4E78" },
+  //     // "& .Mui-disabled .MuiStepIcon-root": { color: "cyan" }
+  //   }
+  // }));
+
+  // const c = useStyles();
 
   // console.log('Address Attributes: ', addressAttributes)
   // console.log('Medicare Attributes: ', medicareAttributes)
@@ -170,20 +180,20 @@ export default function Checkout() {
       </AppBar> */}
       <Container component="main" maxWidth="lg" sx={{ mb: 4 }}>
         <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
-          <Typography component="h1" variant="h4" align="center">
+          <Typography component="h1" variant="h4" align="center" color="#1D4E78">
             <strong>Medicare COVID-19 Test Kit Sign-Up</strong>
           </Typography>
-          <Stepper activeStep={activeStep} sx={{
+          <Stepper  activeStep={activeStep} sx={{
             pt: 3,
             pb: 5,
             
           }}>
             {steps.map((label) => (
-              <Step key={label}
-                
-                
+              <Step 
               >
-                <StepLabel>{label}</StepLabel>
+                <StepLabel>
+                {label}
+              </StepLabel>
               </Step>
             ))}
           </Stepper>
