@@ -61,6 +61,37 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
     if (!values.memberShippingAddress) {
       errors.memberShippingAddress = 'Required';
     } 
+
+    if (values.memberShippingAddress === 'Yes') {
+
+      if (!values.memberAddress1) {
+        errors.memberAddress1 = 'Required';
+      } else if (values.memberAddress1.length > 255) {
+        errors.memberAddress1 = 'Must be 255 characters or less';
+      }
+    
+      if (values.memberAddress2.length > 255) {
+          errors.memberAddress2 = 'Must be 255 characters or less';
+      }
+
+      if (!values.memberCity) {
+        errors.memberCity = 'Required';
+      } else if (values.memberCity.length > 50) {
+        errors.memberCity = 'Must be 50 characters or less';
+      }
+    
+      if (!values.memberState) {
+          errors.memberState = 'Required';
+      } else if (values.memberState.length > 20) {
+          errors.memberState = 'Must be 20 characters or less';
+      }
+
+      if (!values.memberZip) {
+        errors.memberZip = 'Required';
+      } else if (values.memberZip.length > 10) {
+        errors.memberZip = 'Must be 10 characters or less';
+      }
+    }
     
     // if (values.address2.length > 255) {
     //     errors.address2 = 'Must be 255 characters or less';
@@ -76,6 +107,10 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
 
     if (!values.memberYear) {
       errors.memberYear = 'Required';
+    }
+
+    if (!values.memberAgreement) {
+      errors.memberAgreement = 'Required';
     }
     setMedicareAttributes(values)
     // console.log(medicareAttributes)
@@ -455,14 +490,28 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
           />
         </Grid>}
         <Grid item xs={12} sm={12}>
-        <FormGroup>
-            <FormControlLabel control={<Checkbox
+          <FormControl>
+          <FormGroup
+            error={true}
+            helperText={formik.touched.memberAgreement && formik.errors.memberAgreement ?
+              formik.errors.memberAgreement :
+              ""
+            }
+
+          
+          >
+            <FormControlLabel
+              control={<Checkbox
               defaultChecked={formik.values.memberAgreement ? true : false}
               name='memberAgreement'
               onChange={formik.handleChange}
               value={formik.values.memberAgreement}
             />} label="I agree to receive eight FDA Rapid Antigen Test Kits (with no out-of-pocket costs) per month from Journey Health for the duration of the Public Health Emergency." />
-    </FormGroup>
+            </FormGroup>
+            <FormHelperText error={formik.errors.memberAgreement ? true : false}>
+            {formik.errors.memberAgreement}
+        </FormHelperText>
+          </FormControl>
         </Grid>
 
       </Grid>

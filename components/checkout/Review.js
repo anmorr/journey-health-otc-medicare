@@ -31,7 +31,7 @@ export default function Review({ addressAttributes, medicareAttributes, handleBa
   
   const formAttributes = { ...addressAttributes, ...medicareAttributes }
   
-  console.log("formAttributes: ", formAttributes)
+  // console.log("formAttributes: ", formAttributes)
 
   
 
@@ -47,7 +47,7 @@ export default function Review({ addressAttributes, medicareAttributes, handleBa
         ...addressAttributes, ...medicareAttributes
       })
       .then(function (response) {
-        console.log("response: ", response);
+        // console.log("response: ", response);
         if (response.data.orderId) {
           setOrderNumber(response.data.orderId)
         } else {
