@@ -123,7 +123,7 @@ const Hero = () => {
               >
                 <Typed
                   strings={['$0 OUT OF POCKET ', '100% Covered by Medicare ']}
-                  typeSpeed={80}
+                  typeSpeed={90}
                   loop={true}
                 />
               </Typography>
