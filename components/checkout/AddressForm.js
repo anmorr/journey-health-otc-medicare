@@ -434,14 +434,27 @@ export default function AddressForm({
           />
         </Grid> */}
               </Grid>
-              <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Box sx={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+            
+        }}>
 
                
                 { <Button
                     // disabled={(activeStep === 1 && (medicareErrors === true))}
                     variant="contained"
                     onClick={formik.handleSubmit}
-                    sx={{ mt: 3, ml: 1 }}
+            sx={{
+              mt: 3,
+              ml: 1,
+              background: "#EC7E32",
+            "&:hover": {
+              //you want this to be the same as the backgroundColor above
+              background: "#1D4E78",
+              color: "#EC7E32"
+          }
+            }}
                 >
                     {'Next'}
                 </Button>}

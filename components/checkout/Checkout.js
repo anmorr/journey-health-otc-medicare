@@ -17,6 +17,7 @@ import AddressForm from './AddressForm';
 import MedicareForm from './MedicareForm';
 import Review from './Review';
 import { useState } from 'react';
+import Main from '../../layout/Main/Main';
 
 function Copyright() {
   return (
@@ -151,6 +152,7 @@ export default function Checkout() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <Main>
       {/* <AppBar
         position="absolute"
         color="default"
@@ -171,9 +173,16 @@ export default function Checkout() {
           <Typography component="h1" variant="h4" align="center">
             <strong>Medicare COVID-19 Test Kit Sign-Up</strong>
           </Typography>
-          <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
+          <Stepper activeStep={activeStep} sx={{
+            pt: 3,
+            pb: 5,
+            
+          }}>
             {steps.map((label) => (
-              <Step key={label}>
+              <Step key={label}
+                
+                
+              >
                 <StepLabel>{label}</StepLabel>
               </Step>
             ))}
@@ -185,7 +194,7 @@ export default function Checkout() {
                     Thank you for your order.
                   </Typography>
                   <Typography variant="subtitle1">
-                    Your order id is # <strong>{orderNumber}</strong>. We have emailed your order
+                    Your order id is #<strong>{orderNumber}</strong>. We have emailed your order
                     confirmation, and will send you an update when your order has
                     shipped.
                   </Typography>
@@ -222,8 +231,9 @@ export default function Checkout() {
             )}
           </React.Fragment>
         </Paper>
-        <Copyright />
-      </Container>
+        {/* <Copyright /> */}
+        </Container>
+        </Main>
     </ThemeProvider>
   );
 }
