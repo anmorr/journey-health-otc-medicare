@@ -23,6 +23,7 @@ const Topbar = ({ onSidebarOpen, pages, colorInvert = false }) => {
 
   const router = useRouter()
   const pathname = router.pathname
+  //console.log("pathname: ", pathname)
 
   return (
     <Box
@@ -32,20 +33,19 @@ const Topbar = ({ onSidebarOpen, pages, colorInvert = false }) => {
       width={1}
     >
       <Box
+        onClick={() => {router.push("/")}}
         display={'flex'}
         component="a"
-        href="/"
         title="theFront"
         width={{ xs: 100, md: 120 }}
       >
-        <Link href={"/"}>
           <Box
             component={'img'}
             src={"https://journey-health-images.s3.us-west-1.amazonaws.com/journey_health_image.webp"}
             height={1}
             width={1}
         />
-        </Link>
+      
       </Box>
           
       <Box sx={{ display: { xs: 'none', md: 'flex' } }} alignItems={'center'}>
@@ -98,7 +98,28 @@ const Topbar = ({ onSidebarOpen, pages, colorInvert = false }) => {
           />
         </Box> */}
 
-<Box marginLeft={4}>
+      <Box marginLeft={4}>
+      {pathname !== "/" && <Button
+            onClick={() => {router.push("/")}}
+            variant="contained"
+            // color="primary"
+            component="a"
+            target="blank"
+            size="large"
+            sx={{
+              background: "#EC7E32",
+              "&:hover": {
+                //you want this to be the same as the backgroundColor above
+                background: "#1D4E78",
+                color: "#EC7E32"
+              }
+            }}
+          >
+            Home
+          </Button>}
+        </Box>
+
+        <Box marginLeft={4}>
           {pathname !== "/signup" &&
            
             <Button
@@ -120,25 +141,6 @@ const Topbar = ({ onSidebarOpen, pages, colorInvert = false }) => {
             Sign Up Here
             </Button>
           }
-
-          {pathname === "/signup" && <Button
-            onClick={() => {router.push("/")}}
-            variant="contained"
-            // color="primary"
-            component="a"
-            target="blank"
-            size="large"
-            sx={{
-              background: "#EC7E32",
-              "&:hover": {
-                //you want this to be the same as the backgroundColor above
-                background: "#1D4E78",
-                color: "#EC7E32"
-              }
-            }}
-          >
-            Home
-          </Button>}
         </Box>
 
         

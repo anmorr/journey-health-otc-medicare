@@ -307,7 +307,13 @@ export default function AddressForm({
                     ""
             }
           />
-        </Grid>
+          </Grid>
+          <Grid  item xs={12}>
+             <Typography paddingTop={"1em"} variant="h6" gutterBottom>
+       <strong>Shipping Address</strong>
+        </Typography>
+          </Grid>
+         
         <Grid item xs={12}>
           <TextField
             required
