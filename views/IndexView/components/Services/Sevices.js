@@ -13,7 +13,7 @@ const mock = [
   {
     title: 'Provide Your Information',
     subtitle:
-      'Once your information is received, your part is done!',
+      'Once we\'ve received your Medicare and Shipping information, your part is done!',
     icon: (
       <LooksOneIcon sx={{
         color: "#EC7E32",
@@ -39,7 +39,7 @@ const mock = [
   {
     title: 'We Bill Medicare',
     subtitle:
-      'We submit a clain to Medicare. There is $0 cost to you.',
+      'We submit a claim to Medicare. There is $0 cost to you.',
     icon: (
       <LooksTwoIcon sx={{
         color: "#EC7E32",
@@ -114,7 +114,7 @@ const Services = () => {
             sx={{ fontWeight: 400 }}
             align={'center'}
           >
-            Under the current Public Health Emergency, Medicare will cover at-home COVID-19 test kits every month with no out-of-pocket fees to you, even if you have a deductible.
+            Under the current Public Health Emergency, Medicare will cover at-home COVID-19 test kits every month with no out-of-pocket cost to you, even if you have a deductible.
           </Typography>
         </Box>
       </Box>
