@@ -26,6 +26,20 @@ const OrderPage = () => {
           gtag('config', 'UA-239505202-1');
           `}
         </Script>
+
+        <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-SDT8BTLCSG"
+        strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', 'G-SDT8BTLCSG');
+          `}
+            </Script>
             <Checkout />
         </>
         
