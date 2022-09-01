@@ -152,7 +152,7 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
     )
   }
   let years = []
-  for (let j = 1900; j < 1959; j++){
+  for (let j = 1975; j >= 1920; j--){
     years.push(
       <option key={j} value={j}>{j}</option>
     )
