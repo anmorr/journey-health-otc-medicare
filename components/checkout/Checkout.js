@@ -77,6 +77,7 @@ export default function Checkout() {
     memberYear: '',
     memberId: '',
     memberRelation: null,
+    memberSex: '',
     memberShippingAddress: '',
     memberAddress1: '',
     memberAddress2: '',

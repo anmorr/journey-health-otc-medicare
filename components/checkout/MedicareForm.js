@@ -57,6 +57,10 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
     if (!values.memberRelation) {
         errors.memberRelation = 'Required';
     } 
+
+    if (!values.memberSex) {
+      errors.memberSex = 'Required';
+  } 
     
     if (!values.memberShippingAddress) {
       errors.memberShippingAddress = 'Required';
@@ -332,6 +336,36 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
                       onBlur={formik.handleBlur}
           />
         </Grid>
+
+        <Grid item xs={12} md={12}>
+          <FormControl
+            error={formik.touched.memberSex && formik.errors.memberSex ? true : false}
+            
+          
+          >
+            <FormLabel id="demo-controlled-radio-buttons-group" sx={{
+        color: 'black'
+      }}>Medicare Member's Sex</FormLabel>
+      <RadioGroup
+        aria-labelledby="demo-controlled-radio-buttons-group"
+        name="memberSex"
+        id='memberSex'
+        value={formik.values.memberSex}
+              onChange={formik.handleChange}
+              
+      >
+        <FormControlLabel value="M" control={<Radio />} label="Male" />
+        <FormControlLabel value="F" control={<Radio />} label="Female" />
+        <FormControlLabel value="U" control={<Radio />} label="Unknown" />
+        
+        </RadioGroup>
+        <FormHelperText>{formik.touched.memberSex && formik.errors.memberSex ?
+                  formik.errors.memberSex :
+                  ""}</FormHelperText>
+    </FormControl>
+        </Grid>
+
+
         <Grid item xs={12} md={12}>
           <FormControl
             error={formik.touched.memberRelation && formik.errors.memberRelation ? true : false}
