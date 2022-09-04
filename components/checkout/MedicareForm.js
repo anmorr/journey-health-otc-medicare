@@ -345,7 +345,7 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
           >
             <FormLabel id="demo-controlled-radio-buttons-group" sx={{
         color: 'black'
-      }}>Medicare Member's Sex</FormLabel>
+      }}>Medicare Member&apos;s Sex</FormLabel>
       <RadioGroup
         aria-labelledby="demo-controlled-radio-buttons-group"
         name="memberSex"
