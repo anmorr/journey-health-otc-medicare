@@ -120,7 +120,7 @@ const Topbar = ({ onSidebarOpen, pages, colorInvert = false }) => {
         </Box>
 
         <Box marginLeft={4}>
-          {pathname !== "/signup" &&
+          {!pathname.includes("order-confirmation") &&
            
             <Button
             onClick={() => {router.push("/signup")}}
