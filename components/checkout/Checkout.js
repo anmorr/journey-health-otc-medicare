@@ -20,6 +20,8 @@ import { useState } from 'react';
 import Main from '../../layout/Main/Main';
 import { makeStyles } from '@mui/styles';
 import OrderConfirmation from './OrderConfirmation';
+import OrderConfirmationPage from '../../pages/order-confirmation';
+import { useRouter } from 'next/router';
 
 function Copyright() {
   return (
@@ -87,6 +89,8 @@ export default function Checkout() {
     memberZip: '',
     memberAgreement: '',
   }
+
+  const router = useRouter()
 
     const [addressAttributes, setAddressAttributes] = useState(initialAddressValues);
     const [addressErrors, setAddressErrors] = useState({});
@@ -201,7 +205,12 @@ export default function Checkout() {
           </Stepper>
           <React.Fragment>
               {activeStep === steps.length ? (
-                <OrderConfirmation orderNumber={orderNumber} />
+                // <OrderConfirmation orderNumber={orderNumber} />
+                router.replace({
+                  pathname: "/order-confirmation",
+                  query: {orderNumber: orderNumber}
+
+                })
                 // <React.Fragment>
                 //   <Typography variant="h5" gutterBottom>
                 //     Thank you for your order.
