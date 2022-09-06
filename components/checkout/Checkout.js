@@ -19,6 +19,7 @@ import Review from './Review';
 import { useState } from 'react';
 import Main from '../../layout/Main/Main';
 import { makeStyles } from '@mui/styles';
+import OrderConfirmation from './OrderConfirmation';
 
 function Copyright() {
   return (
@@ -199,17 +200,18 @@ export default function Checkout() {
             ))}
           </Stepper>
           <React.Fragment>
-            {activeStep === steps.length ? (
-                <React.Fragment>
-                  <Typography variant="h5" gutterBottom>
-                    Thank you for your order.
-                  </Typography>
-                  <Typography variant="subtitle1">
-                    Your order id is #<strong>{orderNumber}</strong>. We have emailed your order
-                    confirmation, and will send you an update when your order has
-                    shipped.
-                  </Typography>
-                </React.Fragment>
+              {activeStep === steps.length ? (
+                <OrderConfirmation orderNumber={orderNumber} />
+                // <React.Fragment>
+                //   <Typography variant="h5" gutterBottom>
+                //     Thank you for your order.
+                //   </Typography>
+                //   <Typography variant="subtitle1">
+                //     Your order id is #<strong>{orderNumber}</strong>. We have emailed your order
+                //     confirmation, and will send you an update when your order has
+                //     shipped.
+                //   </Typography>
+                // </React.Fragment>
             ) : (
               <React.Fragment>
                 {getStepContent(activeStep)}
