@@ -205,12 +205,12 @@ export default function Checkout() {
           </Stepper>
           <React.Fragment>
               {activeStep === steps.length ? (
-                // <OrderConfirmation orderNumber={orderNumber} />
-                router.replace({
-                  pathname: "/order-confirmation",
-                  query: {orderNumber: orderNumber}
+                <OrderConfirmation orderNumber={orderNumber} />
+                // router.replace({
+                //   pathname: "/order-confirmation",
+                //   query: {orderNumber: orderNumber}
 
-                })
+                // })
                 // <React.Fragment>
                 //   <Typography variant="h5" gutterBottom>
                 //     Thank you for your order.
