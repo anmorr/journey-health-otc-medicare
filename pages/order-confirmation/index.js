@@ -5,16 +5,9 @@ import { useRouter } from "next/router";
 import Main from "../../layout/Main/Main";
 import { useEffect } from "react";
 
-const OrderConfirmationPage = ({ orderNumber }) => {
+const OrderConfirmationPage = () => {
     
     const router = useRouter()
-
-    var orderNumber
-
-    // useEffect(() => {
-    //     console.log("OrderNumber: ", router.query.orderNumber)
-    //     orderNumber = router.query.orderNumber
-    // })
 
     
 
