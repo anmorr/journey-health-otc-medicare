@@ -43,6 +43,27 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
     } else if (values.memberId.length < 11) {
         errors.memberId = 'Invalid Medicare Number. Missing digits';
     }
+
+    if (!values.memberId1) {
+      errors.memberId1 = 'Required';
+    } else if (values.memberId1.length < 4) {
+      const currentLength = (4 - values.memberId1.length)
+      errors.memberId1 = `Missing ${currentLength} ${currentLength > 1 ? ' digits.' : ' digit.'}`;
+    }
+
+    if (!values.memberId2) {
+      errors.memberId2 = 'Required';
+    } else if (values.memberId2.length < 3) {
+      const currentLength = (3 - values.memberId2.length)
+      errors.memberId2 = `Missing ${currentLength} ${currentLength > 1 ? ' digits.' : ' digit.'}`;
+    }
+
+    if (!values.memberId3) {
+      errors.memberId3 = 'Required';
+    } else if (values.memberId3.length < 4) {
+      const currentLength = (4 - values.memberId3.length)
+      errors.memberId3 = `Missing ${currentLength} ${currentLength > 1 ? ' digits.' : ' digit.'}`;
+    }
     
     // if (!values.emailConfirmation) {
     //     errors.emailConfirmation = 'Required';
@@ -116,19 +137,22 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
     if (!values.memberAgreement) {
       errors.memberAgreement = 'Required';
     }
+
+    if (( values.memberId1 && values.memberId2 && values.memberId3) && !(errors.memberId1 || errors.memberId2 || errors.memberId3)) {
+      values.memberId = `${values.memberId1}${values.memberId2}${values.memberId3}`
+    }
     setMedicareAttributes(values)
     // console.log(medicareAttributes)
+    // console.log(errors)
     return errors;
 }
 
 
- 
-  
-  
     const formik = useFormik({
       initialValues: {...medicareAttributes},
       validate,
       onSubmit: values => {
+        // medicareAttributes = {...medicareAttributes, memberId:`${values.memberId1} ${values.memberId2} ${values.memberId3}` } 
           handleNext()
           // alert(JSON.stringify(values, null, 2))
       }
@@ -170,6 +194,38 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
         )
     })
   
+    var elts = document.getElementsByClassName('medicareNumberInput')
+    Array.from(elts).forEach(function(elt){
+      elt.addEventListener("keyup", function(event) {
+        // Number 13 is the "Enter" key on the keyboard
+        
+          if (event.keyCode === 13 || (elt.childNodes[0].childNodes[0].defaultValue.length === 4) && elt.childNodes[0].childNodes[0].name === "memberId1") {
+          // Focus on the next sibling
+            // console.log(elt.childNodes[0].childNodes[0])
+            if (elt.childNodes[0].childNodes[0].name === "memberId1") {
+              document.getElementById("memberId2").focus()
+            }
+          }
+
+          if (event.keyCode === 13 || (elt.childNodes[0].childNodes[0].defaultValue.length === 3) && elt.childNodes[0].childNodes[0].name === "memberId2") {
+            // Focus on the next sibling
+              // console.log(elt.childNodes[0].childNodes[0])
+              if (elt.childNodes[0].childNodes[0].name === "memberId2") {
+                document.getElementById("memberId3").focus()
+              }
+          }
+        
+          if (event.keyCode === 13 || (elt.childNodes[0].childNodes[0].defaultValue.length === 4) && elt.childNodes[0].childNodes[0].name === "memberId3") {
+            // Focus on the next sibling
+              // console.log(elt.childNodes[0].childNodes[0])
+              if (elt.childNodes[0].childNodes[0].name === "memberId3") {
+                document.getElementById("memberId3").blur()
+              }
+            }
+     
+      });
+    })
+  
   
   return (
     <React.Fragment>
@@ -191,7 +247,7 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
             label="First Name"
             fullWidth
             autoComplete="given-name"
-            variant="standard"
+            variant="outlined"
             onChange={formik.handleChange}
                       value={formik.values.memberFirstName}
                       onBlur={formik.handleBlur}
@@ -211,18 +267,140 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
             label="Last Name"
             fullWidth
             autoComplete="family-name"
-            variant="standard"
+            variant="outlined"
             onChange={formik.handleChange}
                       value={formik.values.memberLastName}
                       onBlur={formik.handleBlur}
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
-          <Typography variant="h6" gutterBottom>
-                  Medicare Member&apos;s Date of Birth
+        <Grid item xs={12} sm={12} sx={{
+          textAlign: "center",
+          paddingTop: 10
+        }}>
+          <Typography variant="p" gutterBottom sx={{
+            // fontWeight: "bold"
+            color: "black"
+          }}>
+                  Medicare Member Identification Number
             </Typography>
         </Grid>
         
+        <Grid item xs={12} md={12}  sx={{
+          textAlign: "center",
+          paddingTop: 4
+        }}>
+            <Box>
+              <Image src='https://journey-health-images.s3.us-west-1.amazonaws.com/medicare-card-new-marked-black.png' alt="me" width="375" height="225" />
+            </Box>
+          </Grid>
+        {/* <Grid item xs={12} md={12}> */}
+        <Grid item xs={12} md={12} sx={{
+          textAlign: 'center'
+        }}>
+          <TextField
+            error={formik.touched.memberId1 && formik.errors.memberId1 ? true : false}
+            helperText={
+                formik.touched.memberId1 && formik.errors.memberId1 ?
+                    formik.errors.memberId1 :
+                    ""
+            }
+
+            className="medicareNumberInput"
+
+            name='memberId1'
+            required
+            id="memberId1"
+            // label="Medicare Number"
+            placeholder='XXXX'
+            // fullWidth
+            // autoComplete="cc-exp"
+            variant="outlined"
+            inputProps={{ min: 0, maxLength: 4, style: { textAlign: 'center' } }}
+            sx={{
+              padding: 1
+            }}
+            // onChange={(e) => { 
+            //   formik.handleChange(e)
+            //   console.log(e)
+            //   console.log(e.target.defaultValue.length)
+            //   if (e.target.defaultValue.length === 3) {
+            //     console.log(
+            //       "Equal to 4"
+            //     )
+                
+            //     document.getElementById("memberId2").focus();
+            //     formik.handleBlur(e)
+                
+            //   }
+              
+            // }}
+            onChange={formik.handleChange}
+                      value={formik.values.memberId1}
+                      onBlur={formik.handleBlur}
+          />
+          {/* <span> - </span> */}
+          <TextField
+            error={formik.touched.memberId2 && formik.errors.memberId2 ? true : false}
+            helperText={
+                formik.touched.memberId2 && formik.errors.memberId2 ?
+                    formik.errors.memberId2 :
+                    ""
+            }
+            sx={{
+              padding: 1
+            }}
+
+            name='memberId2'
+            required
+            id="memberId2"
+            // label="Medicare Number"
+            placeholder='XXX'
+            // fullWidth
+            // autoComplete="cc-exp"
+            variant="outlined"
+            inputProps={{ min: 0, maxLength: 3, style: { textAlign: 'center' } }}
+            className="medicareNumberInput"
+            padding="1"
+            onChange={formik.handleChange}
+                      value={formik.values.memberId2}
+                      onBlur={formik.handleBlur}
+          />
+          {/* <span> - </span> */}
+          <TextField
+            error={formik.touched.memberId3 && formik.errors.memberId3 ? true : false}
+            helperText={
+                formik.touched.memberId3 && formik.errors.memberId3 ?
+                    formik.errors.memberId3 :
+                    ""
+            }
+
+            sx={{
+              padding: 1
+            }}
+            name='memberId3'
+            required
+            id="memberId3"
+            // label="Medicare Number"
+            placeholder='XXXX'
+            // fullWidth
+            // autoComplete="cc-exp"
+            variant="outlined"
+            inputProps={{ min: 0, maxLength: 4, style: { textAlign: 'center' } }}
+            className="medicareNumberInput"
+            onChange={formik.handleChange}
+                      value={formik.values.memberId3}
+                      onBlur={formik.handleBlur}
+          />
+        </Grid> 
+        <Grid item xs={12} sm={12}>
+          <Typography variant="p" gutterBottom sx={{
+            // fontWeight: "bold"
+            color: "black"
+          }}>
+                  Medicare Member&apos;s Date of Birth
+            </Typography>
+        </Grid>
+
         <Grid item xs={12} md={4}>
         <FormControl
             sx={{ minWidth: 100 }}
@@ -306,35 +484,6 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
         </NativeSelect>
           </FormControl>
           
-        </Grid>
-        <Grid item xs={12} md={12}  sx={{
-          textAlign: "center",
-          paddingTop: 8
-        }}>
-            <Box>
-              <Image src='https://journey-health-images.s3.us-west-1.amazonaws.com/medicare-card-new-marked-black.png' alt="me" width="375" height="225" />
-            </Box>
-          </Grid>
-        <Grid item xs={12} md={12}>
-          <TextField
-            error={formik.touched.memberId && formik.errors.memberId ? true : false}
-            helperText={
-                formik.touched.memberId && formik.errors.memberId ?
-                    formik.errors.memberId :
-                    ""
-            }
-
-            name='memberId'
-            required
-            id="memberId"
-            label="Medicare Number"
-            fullWidth
-            // autoComplete="cc-exp"
-            variant="standard"
-            onChange={formik.handleChange}
-                      value={formik.values.memberId}
-                      onBlur={formik.handleBlur}
-          />
         </Grid>
 
         <Grid item xs={12} md={12}>
@@ -423,7 +572,7 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
             label="Address line 1"
             fullWidth
             autoComplete="shipping address-line1"
-            variant="standard"
+            variant="outlined"
             onChange={formik.handleChange}
             value={formik.values.memberAddress1}
 
@@ -442,7 +591,7 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
             label="Address line 2"
             fullWidth
             autoComplete="shipping address-line2"
-                      variant="standard"
+                      variant="outlined"
                       onChange={formik.handleChange}
                           value={formik.values.memberAddress2}
                           
@@ -462,7 +611,7 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
             label="City"
             fullWidth
             autoComplete="shipping address-level2"
-            variant="standard"
+            variant="outlined"
             onChange={formik.handleChange}
             value={formik.values.memberCity}
                           
@@ -511,7 +660,7 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
             label="Zip / Postal code"
             fullWidth
             autoComplete="shipping postal-code"
-            variant="standard"
+            variant="outlined"
             onChange={formik.handleChange}
             value={formik.values.memberZip}
                           
@@ -526,17 +675,17 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
         <Grid item xs={12} sm={12}>
           <FormControl>
           <FormGroup
-            error={true}
-            helperText={formik.touched.memberAgreement && formik.errors.memberAgreement ?
-              formik.errors.memberAgreement :
-              ""
-            }
+            // error={true}
+            // helperText={formik.touched.memberAgreement && formik.errors.memberAgreement ?
+            //   formik.errors.memberAgreement :
+            //   ""
+            // }
 
           
           >
             <FormControlLabel
               control={<Checkbox
-              defaultChecked={formik.values.memberAgreement ? true : false}
+              checked={formik.values.memberAgreement ? true : false}
               name='memberAgreement'
               onChange={formik.handleChange}
               value={formik.values.memberAgreement}

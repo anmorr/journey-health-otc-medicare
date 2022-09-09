@@ -224,7 +224,7 @@ export default function AddressForm({
             label="First name"
             fullWidth
             autoComplete="given-name"
-            variant="standard"
+            variant="outlined"
             onChange={formik.handleChange}
                       value={formik.values.firstName}
                       onBlur={formik.handleBlur}
@@ -244,7 +244,7 @@ export default function AddressForm({
             label="Last name"
             fullWidth
             autoComplete="family-name"
-                      variant="standard"
+                      variant="outlined"
                       onChange={formik.handleChange}
                       value={formik.values.lastName}
                       onBlur={formik.handleBlur}
@@ -258,7 +258,7 @@ export default function AddressForm({
             label="Email"
             fullWidth
             autoComplete="email"
-            variant="standard"
+            variant="outlined"
             onChange={formik.handleChange}
                       value={formik.values.email}
                           onBlur={formik.handleBlur}
@@ -277,7 +277,7 @@ export default function AddressForm({
             label="Confirm Email"
             fullWidth
             autoComplete="email"
-                      variant="standard"
+                      variant="outlined"
                       onChange={formik.handleChange}
                       value={formik.values.emailConfirmation}
                           onBlur={formik.handleBlur}
@@ -297,7 +297,7 @@ export default function AddressForm({
             label="Phone Number"
             fullWidth
             autoComplete="phone"
-                      variant="standard"
+                      variant="outlined"
                       onChange={formik.handleChange}
                       value={formik.values.phoneNumber}
                           onBlur={formik.handleBlur}
@@ -322,7 +322,7 @@ export default function AddressForm({
             label="Address line 1"
             fullWidth
             autoComplete="shipping address-line1"
-                      variant="standard"
+                      variant="outlined"
                       onChange={formik.handleChange}
                           value={formik.values.address1}
 
@@ -341,7 +341,7 @@ export default function AddressForm({
             label="Address line 2"
             fullWidth
             autoComplete="shipping address-line2"
-                      variant="standard"
+                      variant="outlined"
                       onChange={formik.handleChange}
                           value={formik.values.address2}
                           
@@ -361,7 +361,7 @@ export default function AddressForm({
             label="City"
             fullWidth
             autoComplete="shipping address-level2"
-                      variant="standard"
+                      variant="outlined"
                       onChange={formik.handleChange}
                           value={formik.values.city}
                           
@@ -381,7 +381,7 @@ export default function AddressForm({
                           error={formik.touched.state && formik.errors.state ? true : false}
         >
         <InputLabel id="demo-simple-select-label">State</InputLabel>
-        <NativeSelect
+              <NativeSelect
         name="state"
         fullWidth
           id="state"
@@ -410,7 +410,7 @@ export default function AddressForm({
             label="Zip / Postal code"
             fullWidth
             autoComplete="shipping postal-code"
-                      variant="standard"
+                      variant="outlined"
                       onChange={formik.handleChange}
                           value={formik.values.zip}
                           
