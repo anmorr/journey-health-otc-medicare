@@ -89,17 +89,19 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
         errors.memberFirstName = 'Required';
       } else if (values.memberFirstName.length > 15) {
         errors.memberFirstName = 'Must be 15 characters or less';
-      } else if (!isAlphaNumericWithSpaces(values.memberFirstName)) {
-        errors.memberFirstName = 'Invalid Character!'
-      } 
+    }
+    // else if (!isAlphaNumericWithSpaces(values.memberFirstName)) {
+    //     errors.memberFirstName = 'Invalid Character!'
+    //   } 
     
     if (!values.memberLastName) {
         errors.memberLastName = 'Required';
     } else if (values.memberLastName.length > 20) {
         errors.memberLastName = 'Must be 20 characters or less';
-    } else if (!isAlphaNumericWithSpaces(values.memberLastName)) {
-      errors.memberLastName = 'Invalid Character!'
-    } 
+    }
+    // else if (!isAlphaNumericWithSpaces(values.memberLastName)) {
+    //   errors.memberLastName = 'Invalid Character!'
+    // } 
     
     if (!values.memberId) {
         errors.memberId = 'Required';
