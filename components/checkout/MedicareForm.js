@@ -409,7 +409,7 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
       </Typography>
           <Grid container spacing={3}>
           {nameAlertOpen && <Grid item xs={12} md={12}>
-              <Alert onClose={handleNameAlertClose} severity="error">We were unable to verify your eligibility. Please ensure the Medicare Member's Name is exactly as it appears on the Memeber ID Card.</Alert>
+              <Alert onClose={handleNameAlertClose} severity="error">We were unable to verify your eligibility. Please ensure the Medicare Member&apos;s Name is exactly as it appears on the Memeber ID Card.</Alert>
             </Grid>}
         <Grid item xs={12} sm={6}>
           <TextField
@@ -573,7 +573,7 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
           />
             </Grid> 
           {DOBAlertOpen && <Grid item xs={12} md={12}>
-            <Alert onClose={handleDOBAlertClose} severity="error">We were unable to verify your eligibility. Please ensure the Medicare Member's Date of Birth is correct.</Alert>
+            <Alert onClose={handleDOBAlertClose} severity="error">We were unable to verify your eligibility. Please ensure the Medicare Member&apos;s Date of Birth is correct.</Alert>
           </Grid>}
         <Grid item xs={12} sm={12}>
           <Typography variant="p" gutterBottom sx={{
