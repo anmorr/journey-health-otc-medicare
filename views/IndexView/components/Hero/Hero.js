@@ -84,6 +84,12 @@ const Hero = () => {
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
+  
+  const isSmall = useMediaQuery('(max-width:600px)');
+  
+  // console.log("isSmall: ", isSmall)
+
+  const heroBoxSize = isSmall ? "275px" : undefined
 
   return (
     <Box
@@ -105,6 +111,7 @@ const Hero = () => {
               gutterBottom
               sx={{
                 fontWeight: 700,
+                height: heroBoxSize
               }}
             >
               Receive 8 Free Rapid COVID Tests Monthly.
@@ -113,7 +120,7 @@ const Hero = () => {
               <Typography
                 color={'#EC7E32'}
                 component={'span'}
-                variant={'h3'}
+                variant={'h4'}
                 
                 sx={{
                   background: `linear-gradient(180deg, transparent 82%, ${alpha(
@@ -122,12 +129,12 @@ const Hero = () => {
                   )} 0%)`,
                 }}
               >
-                {/* <Typed
-                  strings={['$0 OUT OF POCKET ', '100% Covered by Medicare ']}
+                <Typed
+                  strings={['$0 OUT OF POCKET ', '100% COVERED BY MEDICARE ']}
                   typeSpeed={90}
                   loop={true}
-                /> */}
-                $0 OUT OF POCKET.<br/> 100% Covered by Medicare.
+                />
+                {/* $0 OUT OF POCKET.<br/> 100% Covered by Medicare. */}
               </Typography>
             </Typography>
             <Typography
