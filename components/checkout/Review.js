@@ -8,6 +8,7 @@ import { Box, Button } from '@mui/material';
 import axios from 'axios';
 import { useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
+import MuiAlert from '@mui/material/Alert';
 
 const products = [
   {
@@ -27,7 +28,7 @@ const payments = [
   // { name: 'Expiry date', detail: '04/2024' },
 ];
 
-export default function Review({ addressAttributes, medicareAttributes, handleBack, handleNext, activeStep, setActiveStep, setOrderNumber, setIsLoading, isLoading }) {
+export default function Review({ addressAttributes, medicareAttributes, handleBack, handleNext, activeStep, setActiveStep, setOrderNumber, setIsLoading, isLoading, alertSuccessOpen, setSuccessAlertOpen }) {
   
   const formAttributes = { ...addressAttributes, ...medicareAttributes }
   
@@ -35,6 +36,17 @@ export default function Review({ addressAttributes, medicareAttributes, handleBa
 
   
 
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
+  const handleAlertClose = (event) => {
+    setSuccessAlertOpen(false);
+  }
+
+  
+
+  
   
   const url = "https://hyql0rc1o6.execute-api.us-west-1.amazonaws.com/Prod"
 
@@ -54,16 +66,23 @@ export default function Review({ addressAttributes, medicareAttributes, handleBa
           throw new Error("Order Creation Failed. Please try again.")
         }
         setIsLoading(false)
+        setSuccessAlertOpen(false);
         handleNext();
       }).catch(function (error) {
         console.log("error: ", error)
         setIsLoading(false)
       })
   }
+  // console.log("alertSuccessOpen: ", alertSuccessOpen)
 
   return (
     <React.Fragment>
-     { !isLoading &&  <Box>
+      {!isLoading && <Box>
+        {alertSuccessOpen && <Grid item xs={12} md={12}>
+          <Box paddingBottom={5}>
+              <Alert onClose={handleAlertClose} severity="success">Great News! Your eligibility has been verified.</Alert>
+          </Box>
+        </Grid>}
       <Typography variant="h6" gutterBottom>
         <strong>Order summary</strong>
       </Typography>

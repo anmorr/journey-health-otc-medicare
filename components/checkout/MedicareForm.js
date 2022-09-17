@@ -17,11 +17,70 @@ import { states } from '../../shared/data/states';
 import FormGroup from '@mui/material/FormGroup';
 import { Button } from '@mui/material';
 import Image from 'next/image'
+import axios from 'axios';
+import CircularProgress from '@mui/material/CircularProgress';
+import MuiAlert from '@mui/material/Alert';
+import { useRouter } from 'next/router';
 
 
 
+export default function MedicareForm({ medicareAttributes, setMedicareAttributes, activeStep, setActiveStep, handleNext, handleBack, isLoading, setIsLoading, isLoadingalertSuccessOpen, setSuccessAlertOpen }) {
 
-export default function MedicareForm({ medicareAttributes, setMedicareAttributes, activeStep, setActiveStep, handleNext, handleBack }) {
+  const router = useRouter()
+
+  const [alertOpen, setAlertOpen] = React.useState(false);
+
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
+  const handleAlertClose = (event) => {
+    setAlertOpen(false);
+  }
+
+  const [DOBAlertOpen, setDOBAlertOpen] = React.useState(false);
+
+  const handleDOBAlertClose = (event) => {
+    setDOBAlertOpen(false);
+  }
+
+  const [nameAlertOpen, setNameAlertOpen] = React.useState(false);
+
+  const handleNameAlertClose = (event) => {
+    setNameAlertOpen(false);
+  }
+  
+
+  const [memberIdValid, setMemberIdValid] = React.useState(true)
+  
+  function isAlphaNumeric(str) {
+    var code, i, len;
+  
+    for (i = 0, len = str.length; i < len; i++) {
+      code = str.charCodeAt(i);
+      if (!(code > 47 && code < 58) && // numeric (0-9)
+        !(code > 64 && code < 91) && // upper alpha (A-Z)
+        !(code > 96 && code < 123)){ // lower alpha (a-z)
+        return false;
+      }
+    }
+    return true;
+  };
+
+  function isAlphaNumericWithSpaces(str) {
+    var code, i, len;
+  
+    for (i = 0, len = str.length; i < len; i++) {
+      code = str.charCodeAt(i);
+      if (!(code > 47 && code < 58) && // numeric (0-9)
+        !(code > 64 && code < 91) && // upper alpha (A-Z)
+        !(code > 96 && code < 123) && // lower alpha (a-z)
+        !(code === 32)){ 
+        return false;
+      }
+    }
+    return true;
+  };
   
   const validate = values => {
 
@@ -30,13 +89,17 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
         errors.memberFirstName = 'Required';
       } else if (values.memberFirstName.length > 15) {
         errors.memberFirstName = 'Must be 15 characters or less';
-      }
+      } else if (!isAlphaNumericWithSpaces(values.memberFirstName)) {
+        errors.memberFirstName = 'Invalid Character!'
+      } 
     
     if (!values.memberLastName) {
         errors.memberLastName = 'Required';
     } else if (values.memberLastName.length > 20) {
         errors.memberLastName = 'Must be 20 characters or less';
-    }
+    } else if (!isAlphaNumericWithSpaces(values.memberLastName)) {
+      errors.memberLastName = 'Invalid Character!'
+    } 
     
     if (!values.memberId) {
         errors.memberId = 'Required';
@@ -49,21 +112,28 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
     } else if (values.memberId1.length < 4) {
       const currentLength = (4 - values.memberId1.length)
       errors.memberId1 = `Missing ${currentLength} ${currentLength > 1 ? ' digits.' : ' digit.'}`;
-    }
+    } else if (!isAlphaNumeric(values.memberId1)) {
+      errors.memberId1 = 'Invalid Character!'
+    } 
+    
 
     if (!values.memberId2) {
       errors.memberId2 = 'Required';
     } else if (values.memberId2.length < 3) {
       const currentLength = (3 - values.memberId2.length)
       errors.memberId2 = `Missing ${currentLength} ${currentLength > 1 ? ' digits.' : ' digit.'}`;
-    }
+    } else if (!isAlphaNumeric(values.memberId2)) {
+      errors.memberId2 = 'Invalid Character!'
+    } 
 
     if (!values.memberId3) {
       errors.memberId3 = 'Required';
     } else if (values.memberId3.length < 4) {
       const currentLength = (4 - values.memberId3.length)
       errors.memberId3 = `Missing ${currentLength} ${currentLength > 1 ? ' digits.' : ' digit.'}`;
-    }
+    } else if (!isAlphaNumeric(values.memberId3)) {
+      errors.memberId3 = 'Invalid Character!'
+    } 
     
     // if (!values.emailConfirmation) {
     //     errors.emailConfirmation = 'Required';
@@ -138,25 +208,128 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
       errors.memberAgreement = 'Required';
     }
 
-    if (( values.memberId1 && values.memberId2 && values.memberId3) && !(errors.memberId1 || errors.memberId2 || errors.memberId3)) {
-      values.memberId = `${values.memberId1}${values.memberId2}${values.memberId3}`
+    if ((values.memberId1 && values.memberId2 && values.memberId3) && !(errors.memberId1 || errors.memberId2 || errors.memberId3)) {
+      values.memberId1.toUpperCase()
+      values.memberId2.toUpperCase()
+      values.memberId3.toUpperCase()
+      values.memberId = `${values.memberId1}${values.memberId2}${values.memberId3}`.toUpperCase()
+      setAlertOpen(false)
     }
     setMedicareAttributes(values)
     // console.log(medicareAttributes)
-    // console.log(errors)
+    // console.log("errors: ", errors)
     return errors;
-}
+  }
+
+  const url = "/api/check-member-eligibility" //"https://mm23tf5iwh.execute-api.us-west-1.amazonaws.com/Prod/eligibility"
+
 
 
     const formik = useFormik({
       initialValues: {...medicareAttributes},
       validate,
       onSubmit: values => {
+        if (DOBAlertOpen) {
+          setDOBAlertOpen(false)
+        }
+        if (nameAlertOpen) {
+          setNameAlertOpen(false)
+        }
         // medicareAttributes = {...medicareAttributes, memberId:`${values.memberId1} ${values.memberId2} ${values.memberId3}` } 
-          handleNext()
+        checkEligibility({
+          memberId: values.memberId,
+          firstName: values.memberFirstName,
+          lastName: values.memberLastName,
+          memberId1: values.memberId1,
+          memberId2: values.memberId2,
+          memberId3: values.memberId3,
+          dateOfBirth: `${values.memberYear}-${values.memberMonth}-${values.memberDay}`
+        }, values)
+        // handleNext()
           // alert(JSON.stringify(values, null, 2))
       }
     })
+  
+    const checkEligibility = (memberInfo, values) => {
+
+      setIsLoading(true)
+  
+      axios.post(`${url}`,
+        {
+          ...memberInfo
+        })
+        .then(function (response) {
+          if (response) {
+            // console.log(response)
+            // console.log(response.data.member_eligibility_status)
+            if (response.data.member_eligibility_status === "malformed_member_id") {
+              if (response.data.member_id_sections.memberId1 === "invalid") {
+                
+                setAlertOpen(true)
+                formik.values.memberId1 = ""
+              }
+              if (response.data.member_id_sections.memberId2 === "invalid") {
+              
+                setAlertOpen(true)
+                formik.values.memberId2 = ""
+              }
+              if (response.data.member_id_sections.memberId3 === "invalid") {
+                
+                setAlertOpen(true)
+                formik.values.memberId3 = ""
+              }
+              setIsLoading(false)
+            } else if (response.data.member_eligibility_status.status === "Inactive") {
+              router.replace({
+                pathname: "/eligibility-verification",
+                query: { reason: "Inactive" }
+              })
+              setIsLoading(false)
+              // console.log("eligibiltiy_status: ", response.data.member_eligibility_status.status)
+            } else if (response.data.member_eligibility_status.status === "Active Coverage") {
+              // console.log("eligibiltiy_status: ", response.data.member_eligibility_status.status)
+              setIsLoading(false)
+              setSuccessAlertOpen(true)
+              handleNext();
+            } else if (response.data.member_eligibility_status.status === "not_found" && response.data.member_eligibility_status["request-errors"]) {
+              setIsLoading(false)
+              // router.replace({
+              //   pathname: "/eligibility-verification",
+              //   query: {reason: "knownError"}
+              // })
+              if (response.data.member_eligibility_status["request-errors"][0]) {
+                const failureReason = response.data.member_eligibility_status["request-errors"][0].reasonCode;
+                if (failureReason === 71) {
+                  setDOBAlertOpen(true);
+                  // console.log("Patient Birth Date Does Not Match That for the Patient on the Database")
+                }
+                // if (failureReason === 72) {
+                //   setAlertOpen(true);
+                //   console.log("Invalid/Missing Subscriber/Insured ID (72)")
+                // }
+                if (failureReason === 73) {
+                  setNameAlertOpen(true);
+                  // console.log("Invalid/Missing Subscriber/Insured Name")
+                }
+              }
+              
+            } else {
+              setIsLoading(false)
+              router.replace({
+                pathname: "/eligibility-verification",
+                query: {reason: "notFound"}
+              })
+              // console.log(response.data.member_eligibility_status.status)
+              // console.log("No Condition Met")
+            }
+          } else {
+            throw new Error("Eligibility Check Faiiled")
+          }
+        }).catch(function (error) {
+          console.log("error: ", error)
+          setIsLoading(false)
+        })
+      }
   
   let months = [
     <option key={1}  value={1}>January</option>,
@@ -229,10 +402,15 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
   
   return (
     <React.Fragment>
+      {!isLoading && 
+        <Box>
       <Typography variant="h6" gutterBottom>
         Medicare Member Information
       </Typography>
-      <Grid container spacing={3}>
+          <Grid container spacing={3}>
+          {nameAlertOpen && <Grid item xs={12} md={12}>
+              <Alert onClose={handleNameAlertClose} severity="error">We were unable to verify your eligibility. Please ensure the Medicare Member's Name is exactly as it appears on the Memeber ID Card.</Alert>
+            </Grid>}
         <Grid item xs={12} sm={6}>
           <TextField
             error={formik.touched.memberFirstName && formik.errors.memberFirstName ? true : false}
@@ -293,7 +471,9 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
               <Image src='https://journey-health-images.s3.us-west-1.amazonaws.com/medicare-card-new-marked-black.png' alt="me" width="375" height="225" />
             </Box>
           </Grid>
-        {/* <Grid item xs={12} md={12}> */}
+            {alertOpen && <Grid item xs={12} md={12}>
+              <Alert onClose={handleAlertClose} severity="error">The Member ID Format is Incorrect. Please ensure the input matches the numbers on the ID card exactly!</Alert>
+            </Grid>}
         <Grid item xs={12} md={12} sx={{
           textAlign: 'center'
         }}>
@@ -391,7 +571,10 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
                       value={formik.values.memberId3}
                       onBlur={formik.handleBlur}
           />
-        </Grid> 
+            </Grid> 
+          {DOBAlertOpen && <Grid item xs={12} md={12}>
+            <Alert onClose={handleDOBAlertClose} severity="error">We were unable to verify your eligibility. Please ensure the Medicare Member's Date of Birth is correct.</Alert>
+          </Grid>}
         <Grid item xs={12} sm={12}>
           <Typography variant="p" gutterBottom sx={{
             // fontWeight: "bold"
@@ -735,7 +918,26 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
                     {activeStep === 2 ? 'Place order' : 'Next'}
                 </Button>}
                                       
-                </Box>
+          </Box>
+          </Box>
+      }
+      {isLoading && <Box sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        
+      }}>
+        <CircularProgress />
+      </Box>}
+
+        {isLoading &&<Box sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          
+        }}>
+          <br/>
+          Verifying Eligibility
+      </Box>
+    }
     </React.Fragment>
   );
 }

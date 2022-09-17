@@ -102,6 +102,7 @@ export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [orderNumber, setOrderNumber] = useState()
   const [isLoading, setIsLoading] = useState(false)
+  const [alertSuccessOpen, setSuccessAlertOpen] = React.useState(false);
 
     const addressFormSubmitHandler = (values) => {
       setAddressAttributes(values)
@@ -138,6 +139,10 @@ export default function Checkout() {
               activeStep={activeStep}
           setActiveStep={setActiveStep}
           handleBack={handleBack}
+          setIsLoading={setIsLoading}
+          isLoading={isLoading}
+          alertSuccessOpen={alertSuccessOpen}
+          setSuccessAlertOpen={setSuccessAlertOpen}
         />;
       
       case 2:
@@ -151,6 +156,8 @@ export default function Checkout() {
           setOrderNumber={setOrderNumber}
           setIsLoading={setIsLoading}
           isLoading={isLoading}
+          alertSuccessOpen={alertSuccessOpen}
+          setSuccessAlertOpen={setSuccessAlertOpen}
         />;
       default:
         throw new Error('Unknown step');
