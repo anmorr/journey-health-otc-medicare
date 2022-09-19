@@ -28,7 +28,7 @@ const EligibilityFailedVerification = ({ reason }) => {
                         </Typography>} 
 
                         { reason === "alreadyEnrolled" &&<Typography textAlign={"center"} variant="h5" gutterBottom>
-                            Great News! <u>It looks like you're already enrolled.</u>
+                            Great News! <u>It looks like you&apos;re already enrolled.</u>
                         </Typography>} 
                     
                     </Box>
