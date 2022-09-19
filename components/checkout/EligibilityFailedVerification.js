@@ -18,12 +18,17 @@ const EligibilityFailedVerification = ({ reason }) => {
                     }}>
                         
                         { reason === "Inactive" &&  <Typography textAlign={"center"} variant="h5" gutterBottom>
-                            We have confirmed your enrollment with Medicare, but given that your <u>Medicare Part B coverage is Inactive</u>, you are not eligble for this program.
+                            We have confirmed your enrollment with Medicare, but given that your <u>Medicare Part B coverage is Inactive</u>, we are unable to process your order at this time.
                             
                         </Typography>}
                         
-                        { reason !== "Inactive" &&<Typography textAlign={"center"} variant="h5" gutterBottom>
+                        
+                        { (reason === "notFound") &&<Typography textAlign={"center"} variant="h5" gutterBottom>
                             Unfortunately, <u>we could not verify your enrollment with Medicare.</u>
+                        </Typography>} 
+
+                        { reason === "alreadyEnrolled" &&<Typography textAlign={"center"} variant="h5" gutterBottom>
+                            Great News! <u>It looks like you're already enrolled.</u>
                         </Typography>} 
                     
                     </Box>
