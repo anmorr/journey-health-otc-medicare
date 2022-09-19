@@ -9,6 +9,7 @@ export default async function handler(req, res) {
         try {
             const response = await axios({
                 method: 'post',
+                // 'url' : 'http://localhost:4000/eligibility',
                 'url' : 'https://mm23tf5iwh.execute-api.us-west-1.amazonaws.com/Prod/eligibility',
                 headers: {
                     // Authorization: authorization,
@@ -20,12 +21,11 @@ export default async function handler(req, res) {
             // console.log("response=> ", res.json())
             // res.status = res.status
             const responseData = await response.data
-            // console.log("responseData: ", responseData)
+            console.log("responseData: ", responseData)
             res.status(res.statusCode).json({...responseData})
         } catch (error) {
             console.log("res: ", res)
             res.json()
-            
         }
     }
     
