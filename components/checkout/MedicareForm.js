@@ -211,14 +211,18 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
     }
 
     if ((values.memberId1 && values.memberId2 && values.memberId3) && !(errors.memberId1 || errors.memberId2 || errors.memberId3)) {
-      values.memberId1.toUpperCase()
-      values.memberId2.toUpperCase()
-      values.memberId3.toUpperCase()
+      values.memberId1 = values.memberId1.toUpperCase()
+      values.memberId2 = values.memberId2.toUpperCase()
+      values.memberId3 = values.memberId3.toUpperCase()
       values.memberId = `${values.memberId1}${values.memberId2}${values.memberId3}`.toUpperCase()
       setAlertOpen(false)
     }
+    if ((values.memberFirstName && values.memberLastName) && !(errors.memberFirstName || errors.memberLastName)) {
+      values.memberFirstName = values.memberFirstName.toUpperCase()
+      values.memberLastName = values.memberLastName.toUpperCase()
+    }
     setMedicareAttributes(values)
-    // console.log(medicareAttributes)
+    console.log(medicareAttributes)
     // console.log("errors: ", errors)
     return errors;
   }
@@ -295,10 +299,10 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
               handleNext();
             } else if (response.data.member_eligibility_status.status === "not_found" && response.data.member_eligibility_status["request-errors"]) {
               setIsLoading(false)
-              // router.replace({
-              //   pathname: "/eligibility-verification",
-              //   query: {reason: "knownError"}
-              // })
+              router.replace({
+                pathname: "/eligibility-verification",
+                query: {reason: "notFound"}
+              })
               if (response.data.member_eligibility_status["request-errors"][0]) {
                 const failureReason = response.data.member_eligibility_status["request-errors"][0].reasonCode;
                 if (failureReason === 71) {
@@ -315,6 +319,12 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
                 }
               }
               
+            } else if (response.data.member_eligibility_status === "member_already_enrolled") {
+              setIsLoading(false)
+              router.replace({
+                pathname: "/eligibility-verification",
+                query: {reason: "alreadyEnrolled"}
+              })
             } else {
               setIsLoading(false)
               router.replace({
