@@ -285,6 +285,12 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
                 formik.values.memberId3 = ""
               }
               setIsLoading(false)
+            } else if (response.data.member_eligibility_status === "member_already_enrolled") {
+              setIsLoading(false)
+              router.replace({
+                pathname: "/eligibility-verification",
+                query: {reason: "alreadyEnrolled"}
+              })
             } else if (response.data.member_eligibility_status.status === "Inactive") {
               router.replace({
                 pathname: "/eligibility-verification",
@@ -318,13 +324,6 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
                   // console.log("Invalid/Missing Subscriber/Insured Name")
                 }
               }
-              
-            } else if (response.data.member_eligibility_status === "member_already_enrolled") {
-              setIsLoading(false)
-              router.replace({
-                pathname: "/eligibility-verification",
-                query: {reason: "alreadyEnrolled"}
-              })
             } else {
               setIsLoading(false)
               router.replace({
