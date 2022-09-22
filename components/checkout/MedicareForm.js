@@ -292,11 +292,11 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
                 query: {reason: "alreadyEnrolled"}
               })
             } else if (response.data.member_eligibility_status.status === "Inactive") {
+              setIsLoading(false)
               router.replace({
                 pathname: "/eligibility-verification",
                 query: { reason: "Inactive" }
               })
-              setIsLoading(false)
               // console.log("eligibiltiy_status: ", response.data.member_eligibility_status.status)
             } else if (response.data.member_eligibility_status.status === "Active Coverage") {
               // console.log("eligibiltiy_status: ", response.data.member_eligibility_status.status)
