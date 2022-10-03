@@ -6,6 +6,8 @@ import { Box } from '@mui/material';
 
 const OrderConfirmation = ({ orderNumber }) => {
 
+    console.log(orderNumber)
+
 
     return (
         <React.Fragment>
@@ -28,9 +30,10 @@ const OrderConfirmation = ({ orderNumber }) => {
                     alignItems: 'center'
                         }}>
                         <Typography variant="subtitle1">
-                            Your order id is #<strong>{orderNumber}</strong>. We have emailed your order
+                            Your order will be shipped
+                            {/* Your order id is #<strong>{orderNumber.orderNumber}</strong>. We have emailed your order
                             confirmation, and will send you an update when your order has
-                            shipped.
+                            shipped. */}
                         </Typography>         
                     </Box>
             </Container>
