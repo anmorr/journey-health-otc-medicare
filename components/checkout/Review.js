@@ -71,7 +71,7 @@ export default function Review({ addressAttributes, medicareAttributes, handleBa
         setIsLoading(false)
         setSuccessAlertOpen(false);
         router.replace(`/order-confirmation?orderNumber=${response.data.orderId}`)
-        handleNext();
+        // handleNext();
       }).catch(function (error) {
         console.log("error: ", error)
         setIsLoading(false)
