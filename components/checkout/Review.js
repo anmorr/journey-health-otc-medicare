@@ -59,8 +59,9 @@ export default function Review({ addressAttributes, medicareAttributes, handleBa
         ...addressAttributes, ...medicareAttributes
       })
       .then(function (response) {
-        // console.log("response: ", response);
+        console.log("response: ", response);
         if (response.data.orderId) {
+
           setOrderNumber(response.data.orderId)
         } else {
           throw new Error("Order Creation Failed. Please try again.")

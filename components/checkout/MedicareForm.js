@@ -222,7 +222,7 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
       values.memberLastName = values.memberLastName.toUpperCase()
     }
     setMedicareAttributes(values)
-    console.log(medicareAttributes)
+    // console.log(medicareAttributes)
     // console.log("errors: ", errors)
     return errors;
   }
