@@ -100,7 +100,7 @@ export default function Checkout() {
     const [medicareAttributes, setMedicareAttributes] = useState(initialMedicareValues);
     const [medicareErrors, setMedicareErrors] = useState({});
   const [activeStep, setActiveStep] = React.useState(0);
-  const [orderNumber, setOrderNumber] = useState()
+  const [orderNumber, setOrderNumber] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [alertSuccessOpen, setSuccessAlertOpen] = React.useState(false);
 
@@ -216,11 +216,11 @@ export default function Checkout() {
           <React.Fragment>
               {activeStep === steps.length ? (
                 // <OrderConfirmation orderNumber={orderNumber} />
-                router.replace({
-                  pathname: "/order-confirmation",
-                  query: {orderNumber: orderNumber}
+                router.replace(`/order-confirmation?orderNumber=${orderNumber}`)
+                //   pathname: "/order-confirmation",
+                //   query: {orderNumber: orderNumber}
 
-                })
+                // )
                 // <React.Fragment>
                 //   <Typography variant="h5" gutterBottom>
                 //     Thank you for your order.
