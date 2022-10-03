@@ -4,9 +4,10 @@ import Main from '../../layout/Main/Main';
 import Container from '../Container'; 
 import { Box } from '@mui/material';
 
-const OrderConfirmation = ({ orderNumber }) => {
+// const OrderConfirmation = ({ orderNumber }) => {
+const OrderConfirmation = () => {
 
-    console.log(orderNumber)
+    // console.log(orderNumber)
 
 
     return (
