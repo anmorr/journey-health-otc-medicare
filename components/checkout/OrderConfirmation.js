@@ -6,7 +6,7 @@ import { Box } from '@mui/material';
 
 const OrderConfirmation = ({ orderNumber }) => {
 
-    console.log(orderNumber)
+    
 
 
     return (
