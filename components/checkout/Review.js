@@ -11,7 +11,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import MuiAlert from '@mui/material/Alert';
 import { useRouter } from 'next/router';
 
-const router = useRouter()
+
 
 const products = [
   {
@@ -36,6 +36,7 @@ export default function Review({ addressAttributes, medicareAttributes, handleBa
   const formAttributes = { ...addressAttributes, ...medicareAttributes }
   
   // console.log("formAttributes: ", formAttributes)
+  const router = useRouter()
 
   
 
