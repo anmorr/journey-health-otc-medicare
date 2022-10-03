@@ -9,6 +9,9 @@ import axios from 'axios';
 import { useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import MuiAlert from '@mui/material/Alert';
+import { useRouter } from 'next/router';
+
+const router = useRouter()
 
 const products = [
   {
@@ -66,6 +69,7 @@ export default function Review({ addressAttributes, medicareAttributes, handleBa
         }
         setIsLoading(false)
         setSuccessAlertOpen(false);
+        router.replace(`/order-confirmation?orderNumber=${orderNumber}`)
         handleNext();
       }).catch(function (error) {
         console.log("error: ", error)
