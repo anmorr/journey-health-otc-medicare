@@ -4,17 +4,16 @@ import Main from '../../layout/Main/Main';
 import Container from '../Container'; 
 import { Box } from '@mui/material';
 
-// const OrderConfirmation = ({ orderNumber }) => {
-const OrderConfirmation = () => {
+const OrderConfirmation = ({ orderNumber }) => {
 
-    // console.log(orderNumber)
+    console.log(orderNumber)
 
 
     return (
         <React.Fragment>
         <Main>
                 <Container>
-                    {/* <Box marginTop={20} sx={{
+                    <Box marginTop={20} sx={{
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: 'center'
@@ -24,19 +23,18 @@ const OrderConfirmation = () => {
                                 Thank you for your order.
                         </Typography> 
                     
-                    </Box> */}
-                    {/* <Box marginBottom={40}  sx={{
+                    </Box>
+                    <Box marginBottom={40}  sx={{
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center'
                         }}>
                         <Typography variant="subtitle1">
-                            Your order will be shipped
-                            {/* Your order id is #<strong>{orderNumber.orderNumber}</strong>. We have emailed your order
+                            Your order id is #<strong>{orderNumber}</strong>. We have emailed your order
                             confirmation, and will send you an update when your order has
-                            shipped. 
+                            shipped.
                         </Typography>         
-                    </Box> */}
+                    </Box>
             </Container>
         </Main>
         </React.Fragment>
