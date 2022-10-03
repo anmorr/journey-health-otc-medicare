@@ -14,7 +14,7 @@ const OrderConfirmation = () => {
         <React.Fragment>
         <Main>
                 <Container>
-                    <Box marginTop={20} sx={{
+                    {/* <Box marginTop={20} sx={{
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: 'center'
@@ -24,8 +24,8 @@ const OrderConfirmation = () => {
                                 Thank you for your order.
                         </Typography> 
                     
-                    </Box>
-                    <Box marginBottom={40}  sx={{
+                    </Box> */}
+                    {/* <Box marginBottom={40}  sx={{
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center'
@@ -34,9 +34,9 @@ const OrderConfirmation = () => {
                             Your order will be shipped
                             {/* Your order id is #<strong>{orderNumber.orderNumber}</strong>. We have emailed your order
                             confirmation, and will send you an update when your order has
-                            shipped. */}
+                            shipped. 
                         </Typography>         
-                    </Box>
+                    </Box> */}
             </Container>
         </Main>
         </React.Fragment>
