@@ -8,7 +8,7 @@ import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import NativeSelect from '@mui/material/NativeSelect';
-import { useFormik } from 'formik';
+import { useFormik, Field, FormikProvider } from 'formik';
 import { Box } from '@mui/material';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -21,12 +21,24 @@ import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
 import MuiAlert from '@mui/material/Alert';
 import { useRouter } from 'next/router';
+import SignaturePad from "react-signature-canvas";
+import classes from './MedicareForm.module.css';
 
 
 
-export default function MedicareForm({ medicareAttributes, setMedicareAttributes, activeStep, setActiveStep, handleNext, handleBack, isLoading, setIsLoading, isLoadingalertSuccessOpen, setSuccessAlertOpen }) {
+export default function MedicareForm({ addressAttributes, medicareAttributes, setMedicareAttributes, activeStep, setActiveStep, handleNext, handleBack, isLoading, setIsLoading, isLoadingalertSuccessOpen, setSuccessAlertOpen }) {
 
   const router = useRouter()
+  const [sigUrl, setSigUrl] = React.useState("")
+  const sigCanvas = React.useRef();
+
+  const clearSignature = () => {
+    sigCanvas.current.clear()
+  }
+  const saveSignature = () => {
+    console.log("Saving signature...")
+    setSigUrl(String(sigCanvas.current.getTrimmedCanvas().toDataURL("image/png")));
+  }
 
   const [alertOpen, setAlertOpen] = React.useState(false);
 
@@ -222,6 +234,10 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
       values.memberLastName = values.memberLastName.toUpperCase()
     }
     setMedicareAttributes(values)
+    // console.log(values)
+    // if (!sigUrl) {
+    //   errors.memberSignatrue = 'Required'
+    // }
     // console.log(medicareAttributes)
     // console.log("errors: ", errors)
     return errors;
@@ -235,13 +251,17 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
       initialValues: {...medicareAttributes},
       validate,
       onSubmit: values => {
+        
         if (DOBAlertOpen) {
           setDOBAlertOpen(false)
         }
         if (nameAlertOpen) {
           setNameAlertOpen(false)
         }
-        // medicareAttributes = {...medicareAttributes, memberId:`${values.memberId1} ${values.memberId2} ${values.memberId3}` } 
+        // saveSignature()
+        // medicareAttributes.memberSignature = String(sigUrl)
+        // console.log("medicareAttributes: ", medicareAttributes)
+        // medicareAttributes = {...medicareAttributes, memberId:`${values.memberId1} ${values.memberId2} ${values.memberId3}` }
         checkEligibility({
           memberId: values.memberId,
           firstName: values.memberFirstName,
@@ -249,7 +269,14 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
           memberId1: values.memberId1,
           memberId2: values.memberId2,
           memberId3: values.memberId3,
-          dateOfBirth: `${values.memberYear}-${values.memberMonth}-${values.memberDay}`
+          dateOfBirth: `${values.memberYear}-${values.memberMonth}-${values.memberDay}`,
+          email: addressAttributes.email,
+          address1: addressAttributes.address1,
+          address2: addressAttributes.address2,
+          city: addressAttributes.city,
+          state: addressAttributes.state,
+          zip: addressAttributes.zip,
+          phoneNumber: addressAttributes.phoneNumber
         }, values)
         // handleNext()
           // alert(JSON.stringify(values, null, 2))
@@ -263,6 +290,7 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
       axios.post(`${url}`,
         {
           ...memberInfo
+
         })
         .then(function (response) {
           if (response) {
@@ -305,10 +333,10 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
               handleNext();
             } else if (response.data.member_eligibility_status.status === "not_found" && response.data.member_eligibility_status["request-errors"]) {
               setIsLoading(false)
-              router.replace({
-                pathname: "/eligibility-verification",
-                query: {reason: "notFound"}
-              })
+              // router.replace({
+              //   pathname: "/eligibility-verification",
+              //   query: {reason: "notFound"}
+              // })
               if (response.data.member_eligibility_status["request-errors"][0]) {
                 const failureReason = response.data.member_eligibility_status["request-errors"][0].reasonCode;
                 if (failureReason === 71) {
@@ -889,7 +917,31 @@ export default function MedicareForm({ medicareAttributes, setMedicareAttributes
             {formik.errors.memberAgreement}
         </FormHelperText>
           </FormControl>
-        </Grid>
+            </Grid>
+            {/* <Grid item xs={12} sm={6}>
+            <Typography variant="p" gutterBottom sx={{
+            fontWeight: "bold",
+                color: "black",
+              }}> */}
+                {/* <FormHelperText error={formik.errors.memberSignature ? true : false}>
+            {formik.errors.memberSignature}
+        </FormHelperText> */}
+                
+                  {/* Signature {formik.errors.memberSignature}
+              </Typography>
+              
+            <SignaturePad
+        ref={sigCanvas}
+        canvasProps={{
+          className: classes.signatureCanvas
+        }}
+              />
+              <Button onClick={clearSignature} sx={{
+            mt: 1,
+            color: "#1D4E78"
+          }}>Clear</Button>
+
+            </Grid> */}
 
       </Grid>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
