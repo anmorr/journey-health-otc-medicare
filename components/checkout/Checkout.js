@@ -91,6 +91,7 @@ export default function Checkout() {
     memberState: '',
     memberZip: '',
     memberAgreement: '',
+    memberSignature: '',
   }
 
   const router = useRouter()
@@ -131,6 +132,7 @@ export default function Checkout() {
             />;
       case 1:
         return <MedicareForm
+        addressAttributes={addressAttributes}
           medicareAttributes={medicareAttributes}
           setMedicareAttributes={setMedicareAttributes}
           medicareErrors={medicareErrors}
