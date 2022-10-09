@@ -37,8 +37,8 @@ const GetStarted = () => {
       </Typography>
       <Box
         display="flex"
-        flexDirection={{ xs: 'column', sm: 'row' }}
-        alignItems={{ xs: 'stretched', sm: 'flex-start' }}
+        flexDirection={{ xs: 'column', sm: 'column' }}
+        alignItems={{ xs: 'stretched', sm: 'center' }}
         justifyContent={'center'}
         marginTop={4}
       >
