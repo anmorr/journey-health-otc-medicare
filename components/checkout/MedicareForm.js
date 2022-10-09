@@ -329,7 +329,7 @@ export default function MedicareForm({ addressAttributes, medicareAttributes, se
             } else if (response.data.member_eligibility_status.status === "Active Coverage") {
               // console.log("eligibiltiy_status: ", response.data.member_eligibility_status.status)
               setIsLoading(false)
-              setSuccessAlertOpen(true)
+              // setSuccessAlertOpen(true)
               handleNext();
             } else if (response.data.member_eligibility_status.status === "not_found" && response.data.member_eligibility_status["request-errors"]) {
               setIsLoading(false)
