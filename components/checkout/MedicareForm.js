@@ -26,18 +26,28 @@ import classes from './MedicareForm.module.css';
 
 
 
-export default function MedicareForm({ addressAttributes, medicareAttributes, setMedicareAttributes, activeStep, setActiveStep, handleNext, handleBack, isLoading, setIsLoading, isLoadingalertSuccessOpen, setSuccessAlertOpen }) {
+export default function MedicareForm({ sigUrl, setSigUrl, addressAttributes, medicareAttributes, setMedicareAttributes, activeStep, setActiveStep, handleNext, handleBack, isLoading, setIsLoading, isLoadingalertSuccessOpen, setSuccessAlertOpen }) {
 
   const router = useRouter()
-  const [sigUrl, setSigUrl] = React.useState("")
   const sigCanvas = React.useRef();
 
   const clearSignature = () => {
     sigCanvas.current.clear()
   }
-  const saveSignature = () => {
-    console.log("Saving signature...")
-    setSigUrl(String(sigCanvas.current.getTrimmedCanvas().toDataURL("image/png")));
+  const saveSignature = (values) => {
+    // console.log("Saving signature...")
+    // console.log("isEmpty: ", sigCanvas.current.isEmpty())
+    if (sigCanvas.current.isEmpty()) {
+      return false
+    }
+    const currentSig = String(sigCanvas.current.getTrimmedCanvas().toDataURL("image/png"))
+    // console.log(currentSig)
+    setSigUrl(currentSig)
+    setMedicareAttributes({
+      ...values,
+      memberSignature : currentSig
+    })
+    return true
   }
 
   const [alertOpen, setAlertOpen] = React.useState(false);
@@ -48,6 +58,12 @@ export default function MedicareForm({ addressAttributes, medicareAttributes, se
 
   const handleAlertClose = (event) => {
     setAlertOpen(false);
+  }
+
+  const [SigAlertOpen, setSigAlertOpen] = React.useState(false);
+
+  const handleSigAlertClose = (event) => {
+    setSigAlertOpen(false);
   }
 
   const [DOBAlertOpen, setDOBAlertOpen] = React.useState(false);
@@ -233,11 +249,10 @@ export default function MedicareForm({ addressAttributes, medicareAttributes, se
       values.memberFirstName = values.memberFirstName.toUpperCase()
       values.memberLastName = values.memberLastName.toUpperCase()
     }
-    setMedicareAttributes(values)
     // console.log(values)
-    // if (!sigUrl) {
-    //   errors.memberSignatrue = 'Required'
-    // }
+    
+    setMedicareAttributes(values)
+
     // console.log(medicareAttributes)
     // console.log("errors: ", errors)
     return errors;
@@ -248,7 +263,7 @@ export default function MedicareForm({ addressAttributes, medicareAttributes, se
 
 
     const formik = useFormik({
-      initialValues: {...medicareAttributes},
+      initialValues: { ...medicareAttributes },
       validate,
       onSubmit: values => {
         
@@ -258,10 +273,14 @@ export default function MedicareForm({ addressAttributes, medicareAttributes, se
         if (nameAlertOpen) {
           setNameAlertOpen(false)
         }
-        // saveSignature()
-        // medicareAttributes.memberSignature = String(sigUrl)
-        // console.log("medicareAttributes: ", medicareAttributes)
-        // medicareAttributes = {...medicareAttributes, memberId:`${values.memberId1} ${values.memberId2} ${values.memberId3}` }
+        const isSigSaved = saveSignature(values)
+        if (!isSigSaved) {
+          // console.log("Signature not completed")
+          setSigAlertOpen(true)
+          return
+        } else {
+          // console.log("Signature completed")
+        }
         checkEligibility({
           memberId: values.memberId,
           firstName: values.memberFirstName,
@@ -918,16 +937,19 @@ export default function MedicareForm({ addressAttributes, medicareAttributes, se
         </FormHelperText>
           </FormControl>
             </Grid>
-            {/* <Grid item xs={12} sm={6}>
+            {SigAlertOpen && <Grid item xs={12} md={12}>
+            <Alert onClose={handleSigAlertClose} severity="error">The Signature must be completed to continue. Please use the mouse or trackpad on a desktop computer, or your finger on a mobile device.</Alert>
+          </Grid>}
+            <Grid item xs={12} sm={12}>
             <Typography variant="p" gutterBottom sx={{
             fontWeight: "bold",
                 color: "black",
-              }}> */}
+              }}>
                 {/* <FormHelperText error={formik.errors.memberSignature ? true : false}>
             {formik.errors.memberSignature}
         </FormHelperText> */}
                 
-                  {/* Signature {formik.errors.memberSignature}
+                  Signature {formik.errors.memberSignature}
               </Typography>
               
             <SignaturePad
@@ -941,7 +963,7 @@ export default function MedicareForm({ addressAttributes, medicareAttributes, se
             color: "#1D4E78"
           }}>Clear</Button>
 
-            </Grid> */}
+            </Grid>
 
       </Grid>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
