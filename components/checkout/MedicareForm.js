@@ -26,7 +26,7 @@ import classes from './MedicareForm.module.css';
 
 
 
-export default function MedicareForm({ sigUrl, setSigUrl, addressAttributes, medicareAttributes, setMedicareAttributes, activeStep, setActiveStep, handleNext, handleBack, isLoading, setIsLoading, isLoadingalertSuccessOpen, setSuccessAlertOpen }) {
+export default function MedicareForm({ sigUrl, setSigUrl, addressAttributes, medicareAttributes, setMedicareAttributes, activeStep, setActiveStep, handleNext, handleBack, isLoading, setIsLoading, alertSuccessOpen, setSuccessAlertOpen }) {
 
   const router = useRouter()
   const sigCanvas = React.useRef();
@@ -348,7 +348,7 @@ export default function MedicareForm({ sigUrl, setSigUrl, addressAttributes, med
             } else if (response.data.member_eligibility_status.status === "Active Coverage") {
               // console.log("eligibiltiy_status: ", response.data.member_eligibility_status.status)
               setIsLoading(false)
-              // setSuccessAlertOpen(true)
+              setSuccessAlertOpen(true)
               handleNext();
             } else if (response.data.member_eligibility_status.status === "not_found" && response.data.member_eligibility_status["request-errors"]) {
               setIsLoading(false)
