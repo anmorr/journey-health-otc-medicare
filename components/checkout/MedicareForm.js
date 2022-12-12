@@ -930,7 +930,7 @@ export default function MedicareForm({ sigUrl, setSigUrl, addressAttributes, med
               name='memberAgreement'
               onChange={formik.handleChange}
               value={formik.values.memberAgreement}
-            />} label="I agree to receive eight FDA Rapid Antigen Test Kits (with no out-of-pocket costs) per month from Journey Health for the duration of the Public Health Emergency." />
+            />} label="I agree to receive eight FDA Rapid Antigen Test Kits, billed to Medicare (with no out-of-pocket costs), per month from Journey Health for the duration of the Public Health Emergency." />
             </FormGroup>
             <FormHelperText error={formik.errors.memberAgreement ? true : false}>
             {formik.errors.memberAgreement}
