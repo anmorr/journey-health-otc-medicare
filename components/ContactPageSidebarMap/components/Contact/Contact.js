@@ -74,7 +74,7 @@ const Contact = () => {
           align={'center'}
           color="#1D4E78"
         >
-          Contact details
+          Contact Details
         </Typography>
         <Typography color='#EC7E32' align={'center'} >
           If you have any questions, please do not hesitate to reach out!
