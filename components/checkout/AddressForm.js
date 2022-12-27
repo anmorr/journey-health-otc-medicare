@@ -155,9 +155,11 @@ export default function AddressForm({
         
             if (!values.zip) {
                 errors.zip = 'Required';
-              } else if (values.zip.length > 10) {
-                errors.zip = 'Must be 10 characters or less';
-              }
+              } else if (values.zip.length > 5) {
+                errors.zip = 'Must be 5 characters or less';
+              } else if (!/^[0-9]*$/i.test(values.zip)) {
+                errors.zip = 'Invalid ZIP Code - Only numbers 0-9 allowed';
+            }
         
             // console.log(errors)
             if (Object.keys(errors).length > 0) {
@@ -407,7 +409,7 @@ export default function AddressForm({
             required
             id="zip"
             name="zip"
-            label="Zip / Postal code"
+            label="Zip Code 5-Digit"
             fullWidth
             autoComplete="shipping postal-code"
                       variant="outlined"
