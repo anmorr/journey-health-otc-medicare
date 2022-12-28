@@ -117,6 +117,8 @@ export default function MedicareForm({ sigUrl, setSigUrl, addressAttributes, med
         errors.memberFirstName = 'Required';
       } else if (values.memberFirstName.length > 15) {
         errors.memberFirstName = 'Must be 15 characters or less';
+      } else if (/\d/i.test(values.memberFirstName)) {
+        errors.memberFirstName = 'Invalid First Name - Numbers are not allowed';
     }
     // else if (!isAlphaNumericWithSpaces(values.memberFirstName)) {
     //     errors.memberFirstName = 'Invalid Character!'
@@ -126,7 +128,9 @@ export default function MedicareForm({ sigUrl, setSigUrl, addressAttributes, med
         errors.memberLastName = 'Required';
     } else if (values.memberLastName.length > 20) {
         errors.memberLastName = 'Must be 20 characters or less';
-    }
+    } else if (/\d/i.test(values.memberLastName)) {
+      errors.memberLastName = 'Invalid Last Name - Numbers are not allowed';
+    } 
     // else if (!isAlphaNumericWithSpaces(values.memberLastName)) {
     //   errors.memberLastName = 'Invalid Character!'
     // } 
