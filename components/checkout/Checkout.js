@@ -200,7 +200,7 @@ export default function Checkout() {
         </Toolbar>
       </AppBar> */}
       <Container component="main" maxWidth="lg" sx={{ mb: 4 }}>
-        <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+        <Paper elevation={4} sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
           <Typography component="h1" variant="h4" align="center" color="#1D4E78">
             <strong>Medicare COVID-19 Test Kit Sign-Up</strong>
           </Typography>
