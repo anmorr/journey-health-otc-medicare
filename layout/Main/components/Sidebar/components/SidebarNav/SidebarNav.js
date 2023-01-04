@@ -114,6 +114,28 @@ const SidebarNav = ({ pages }) => {
           </Button>
           
         </Box>
+        <Box marginTop={1}>
+          <Button
+            size={'large'}
+            variant="contained"
+            fullWidth
+            component="a"
+            target="blank"
+            onClick={() => {router.push("/faq")}}
+            sx={{
+              background: "#EC7E32",
+              "&:hover": {
+                //you want this to be the same as the backgroundColor above
+                background: "#1D4E78",
+                color: "#EC7E32"
+            }
+            }}
+          
+          >
+            FAQ
+          </Button>
+          
+        </Box>
       </Box>
     </Box>
   );

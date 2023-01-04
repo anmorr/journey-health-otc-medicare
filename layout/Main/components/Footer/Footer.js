@@ -41,7 +41,7 @@ const Footer = () => {
             />
           </Box>
           <Box display="flex" flexWrap={'wrap'} alignItems={'center'}>
-            <Box marginTop={1} marginRight={2}>
+            {/* <Box marginTop={1} marginRight={2}>
               <Link
                 underline="none"
                 component="a"
@@ -51,7 +51,7 @@ const Footer = () => {
               >
                 Home
               </Link>
-            </Box>
+            </Box> */}
             {/* {pathname !== "/contact" && <Box marginTop={1}>
               <Button
                 onClick={() => {router.push("/signup")}}
@@ -79,7 +79,7 @@ const Footer = () => {
           color="text.secondary"
           gutterBottom
         >
-          &copy; Journey Health. 2022. All rights reserved
+          &copy; Journey Health. 2023. All rights reserved
         </Typography>
         <Typography
           align={'center'}

@@ -138,10 +138,31 @@ const Topbar = ({ onSidebarOpen, pages, colorInvert = false }) => {
             }
             }}
           >
-            Sign Up Here
+            Sign Up
             </Button>
           }
         </Box>
+
+       {pathname !== "/faq" && <Box marginLeft={4}>
+          <Button
+                onClick={() => {router.push("/faq")}}
+            variant="contained"
+            // color="primary"
+            component="a"
+            target="blank"
+            size="large"
+            sx={{
+              background: "#EC7E32",
+              "&:hover": {
+                //you want this to be the same as the backgroundColor above
+                background: "#1D4E78",
+                color: "#EC7E32"
+            }
+            }}
+          >
+            FAQ
+          </Button>
+        </Box>}
 
         
         <Box marginLeft={4}>
