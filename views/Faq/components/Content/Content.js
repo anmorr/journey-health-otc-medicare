@@ -59,7 +59,7 @@ const Content = () => {
     <Box>
       <Box marginBottom={6}>
         <FaqGroupItem
-          title={'General Questions'}
+          title={'General'}
           items={[
             {
               title: 'Am I eligible to receive tests?',
