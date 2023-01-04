@@ -59,7 +59,7 @@ const Content = () => {
     <Box>
       <Box marginBottom={6}>
         <FaqGroupItem
-          title={'Basics'}
+          title={'General Questions'}
           items={[
             {
               title: 'Am I eligible to receive tests?',
@@ -106,7 +106,7 @@ const Content = () => {
             {
               title: 'How long does it take to receive my tests?',
               subtitle:
-                'Most patients receive their tests within 3 days. We process and ship orders within 1-3 business days. Once the tests are shipped, it takes between 2-5 days for them to arrive.',
+                'It usually takes between 3-5 business days to receive the tests.',
             },
             {
               title: 'What is your return policy?',
