@@ -64,7 +64,7 @@ const Content = () => {
             {
               title: 'Am I eligible to receive tests?',
               subtitle:
-                'Medicare covers and pays for 8 over-the-counter (OTC) COVID-19 tests at no cost to people with Medicare Part B, including those with Medicare Advantage (MA) plans. If you are not a Medicare member, or do not have Part B, please see https://covid.gov/tests to receive 4 OTC tests per household.',
+                'Medicare covers and pays for 8 over-the-counter (OTC) COVID-19 tests at no cost to people with Medicare Part B, including those with Medicare Advantage (MA) plans. If you are not a Medicare member, or do not have Part B, please check with your health insurance provider for further information.',
             },
             {
               title: 'Is this a Medicare initiative and when did this start?',
